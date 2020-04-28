@@ -7,7 +7,7 @@ public class PlayerMovementController : ITickable
     private const int _targetYOffset = 10;
 
     private IPlayerShipModelProvider _playerShipModelProvider;
-    private Rect _worldBoundsRect;
+    private ScreenBoundsProvider _screenBoundsProvider;
 
     [Inject]
     public void Construct(
@@ -15,7 +15,7 @@ public class PlayerMovementController : ITickable
         ScreenBoundsProvider screenBoundsProvider)
     {
         _playerShipModelProvider = playerShipModelProvider;
-        _worldBoundsRect = screenBoundsProvider.Bounds;
+        _screenBoundsProvider = screenBoundsProvider;
     }
 
     public void Tick()
@@ -25,6 +25,8 @@ public class PlayerMovementController : ITickable
             return;
         }
 
+        var worldBoundsRect = _screenBoundsProvider.Bounds;
+
         _playerShipModelProvider.ShipModel.UpdateCooldowns();
 
         var shipModel = _playerShipModelProvider.ShipModel;
@@ -32,13 +34,13 @@ public class PlayerMovementController : ITickable
         var mobility = _playerShipModelProvider.ShipModel.Mobility;
         var mousePosNorm = new Vector3(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
 
-        var targetX = _worldBoundsRect.x + mousePosNorm.x * _worldBoundsRect.width;
-        var targetZ = _worldBoundsRect.y + mousePosNorm.y * _worldBoundsRect.height + _targetYOffset;
+        var targetX = worldBoundsRect.x + mousePosNorm.x * worldBoundsRect.width;
+        var targetZ = worldBoundsRect.y + mousePosNorm.y * worldBoundsRect.height + _targetYOffset;
         var newX = playerPosition.x + (targetX - playerPosition.x) * mobility;
         var newZ = playerPosition.z + (targetZ - playerPosition.z) * mobility;
         shipModel.Position = new Vector3(newX, 0, newZ);
 
-        var lookAtZ = targetZ - newZ + _worldBoundsRect.height * LookAtDistanceScreens;
+        var lookAtZ = targetZ - newZ + worldBoundsRect.height * LookAtDistanceScreens;
         shipModel.Rotation = Quaternion.LookRotation(new Vector3(targetX - newX, 0, lookAtZ), Vector3.up);
 
         if (Input.GetMouseButton(0))

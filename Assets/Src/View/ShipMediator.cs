@@ -1,21 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 public class ShipMediator
 {
     private readonly ShipModel _shipModel;
-    private readonly GameObject _initialView;
+    private readonly GameObject _notDestroyedView;
     private readonly Transform[] _weapons;
 
     private EventsAggregator _eventsAggregator;
+    private GameObject _currentView;
     private IViewManager _viewManager;
 
-    public ShipMediator(ShipModel shipModel, GameObject initialView)
+    public ShipMediator(ShipModel shipModel, GameObject notDestroyedView)
     {
         _shipModel = shipModel;
-        _initialView = initialView;
+        _notDestroyedView = notDestroyedView;
+        _currentView = _notDestroyedView;
 
-        _weapons = _initialView.GetComponent<WeaponsComponent>().WeaponTransforms;
+        _weapons = _notDestroyedView.GetComponent<WeaponsComponent>().WeaponTransforms;
     }
 
     [Inject]
@@ -31,7 +34,7 @@ public class ShipMediator
     {
         Deactivate();
 
-        GameObject.Destroy(_initialView);
+        GameObject.Destroy(_currentView);
     }
 
     private void Activate()
@@ -40,6 +43,7 @@ public class ShipMediator
         _shipModel.PositionChanged += OnPositionChanged;
         _shipModel.RotationChanged += OnRotationChanged;
         _shipModel.Fired += OnFired;
+        _shipModel.DestroyStarted += OnDestroyShip;
     }
 
     private void Deactivate()
@@ -48,6 +52,12 @@ public class ShipMediator
         _shipModel.PositionChanged -= OnPositionChanged;
         _shipModel.RotationChanged -= OnRotationChanged;
         _shipModel.Fired -= OnFired;
+        _shipModel.DestroyStarted -= OnDestroyShip;
+    }
+
+    private void OnDestroyShip()
+    {
+        _viewManager.Instantiate(_shipModel.ExplosionPrefab, _currentView.transform.position, _currentView.transform.rotation);
     }
 
     private void OnFired(int weaponIndex, WeaponConfig weaponConfig, TeamId team)
@@ -59,11 +69,11 @@ public class ShipMediator
 
     private void OnPositionChanged()
     {
-        _initialView.transform.position = _shipModel.Position;
+        _currentView.transform.position = _shipModel.Position;
     }
 
     private void OnRotationChanged()
     {
-        _initialView.transform.rotation = _shipModel.Rotation;
+        _currentView.transform.rotation = _shipModel.Rotation;
     }
 }

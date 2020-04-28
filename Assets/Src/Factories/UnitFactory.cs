@@ -37,8 +37,8 @@ public class UnitFactory : MonoBehaviour, IUnitFactory
 
     public PlayerShipModel CreatePlayerShip(ShipDataMin shipDataMin)
     {
-        var (go, weaponSlots, colliders, staticData) = CreateShip(shipDataMin);
-        var model = new PlayerShipModel(weaponSlots, colliders, staticData);
+        var (go, colliders, staticData) = CreateShip(shipDataMin);
+        var model = new PlayerShipModel(colliders, staticData);
         _playerShipModelHolder.ShipModel = model;
         _diContainer.Instantiate<ShipMediator>(new object[] { model, go });
 
@@ -47,28 +47,28 @@ public class UnitFactory : MonoBehaviour, IUnitFactory
 
     public EnemyShipModel CreateEnemyShip(ShipDataMin shipDataMin)
     {
-        var (go, weaponSlots, colliders, shipData) = CreateShip(shipDataMin);
-        var model = new EnemyShipModel(weaponSlots, colliders, shipData);
+        var (go, colliders, shipData) = CreateShip(shipDataMin);
+        var model = new EnemyShipModel(colliders, shipData);
         _enemyShipsModelsProvider.AddShip(model);
         _diContainer.Instantiate<ShipMediator>(new object[] { model, go });
 
         model.Rotation = Quaternion.LookRotation(-model.Forward, Vector3.up);
         var rndPos = UnityEngine.Random.insideUnitCircle * _screenBoundsProvider.Bounds.width;
+        rndPos.y += _screenBoundsProvider.Bounds.center.y;
         model.Position = new Vector3(rndPos.x, 0, rndPos.y + Math.Max(_screenBoundsProvider.Bounds.height, _screenBoundsProvider.Bounds.width));
 
         return model;
     }
 
-    private (GameObject, Vector3[], Collider[], ShipData) CreateShip(ShipDataMin shipDataMin)
+    private (GameObject, Collider[], ShipData) CreateShip(ShipDataMin shipDataMin)
     {
         var shipConfig = _shipsConfigProvider.GetConfigByShipType(shipDataMin.ShipType);
         var weaponsConfig = shipDataMin.WeaponIds.Select(_weaponsConfigProvider.GetConfigByWeaponId).ToArray();
         var shipData = new ShipData(shipConfig, weaponsConfig);
-        var weaponSlotPositions = shipConfig.ShipPrefab.GetComponent<WeaponsComponent>().WeaponSlotPositions;
 
         var go = Instantiate(shipConfig.ShipPrefab);
         var colliders = go.GetComponent<CollidersComponent>().Colliders;
 
-        return (go, weaponSlotPositions, colliders, shipData);
+        return (go, colliders, shipData);
     }
 }

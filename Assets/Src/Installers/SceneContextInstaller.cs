@@ -9,6 +9,7 @@ public class SceneContextInstaller : MonoInstaller
         RegisterController<PlayerMovementController>();
         RegisterController<EnemyShipsController>();
         RegisterController<BulletsController>();
+        RegisterController<CameraMoveControler>(); 
 
         Container.BindInterfacesAndSelfTo<UnitFactory>()
             .FromInstance(GetComponent<UnitFactory>());

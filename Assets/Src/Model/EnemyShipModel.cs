@@ -4,8 +4,8 @@ public class EnemyShipModel : ShipModel
 {
     public AIStateBase AIState;
 
-    public EnemyShipModel(Vector3[] weaponLocalPositions, Collider[] colliders, ShipData shipData)
-        : base(TeamId.Enemy, weaponLocalPositions, colliders, shipData)
+    public EnemyShipModel(Collider[] colliders, ShipData shipData)
+        : base(TeamId.Enemy, colliders, shipData)
     {
         AIState = new AIFlyForwardState();
     }

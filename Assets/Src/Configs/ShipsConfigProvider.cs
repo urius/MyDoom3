@@ -24,6 +24,8 @@ public class ShipConfig
 {
     public ShipType ShipType;
     public GameObject ShipPrefab;
+    public GameObject ExplosionPrefab;
+    public GameObject DestroyedShipPrefab;
     public float Speed;
     public float Mobility;
     public float RotationSpeed;

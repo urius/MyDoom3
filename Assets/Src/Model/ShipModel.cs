@@ -8,12 +8,10 @@ public class ShipModel
     public event Action RotationChanged = delegate { };
     public event Action Disposed = delegate { };
     public event Action<int, WeaponConfig, TeamId> Fired = delegate { };
+    public event Action<int> HpChanged = delegate { };
+    public event Action DestroyStarted = delegate { };
 
     public readonly TeamId Team;
-    public readonly Vector3[] WeaponSlotsLocal;
-    public readonly Collider[] Colliders;
-
-    public int HP;
 
     protected readonly ShipData _shipStaticData;
 
@@ -23,11 +21,11 @@ public class ShipModel
 
     private Vector3 _position;
     private Quaternion _rotation;
+    private int _hp;
 
-    public ShipModel(TeamId team, Vector3[] weaponLocalPositions, Collider[] colliders, ShipData shipStaticData)
+    public ShipModel(TeamId team, Collider[] colliders, ShipData shipStaticData)
     {
         Team = team;
-        WeaponSlotsLocal = weaponLocalPositions;
         Colliders = colliders;
 
         _shipStaticData = shipStaticData;
@@ -39,14 +37,35 @@ public class ShipModel
         _cooldowns = (int[])_cooldownStartValues.Clone();
     }
 
+    private bool CanFire => HP > 0 && _cooldowns.Any(c => c <= 0);
+
     public float Speed => _shipStaticData.ShipConfig.Speed;
     public float Mobility => _shipStaticData.ShipConfig.Mobility;
     public float RotationSpeed => _shipStaticData.ShipConfig.RotationSpeed;
+    public GameObject ExplosionPrefab => _shipStaticData.ShipConfig.ExplosionPrefab;
+    public GameObject DestroyedShipPrefab => _shipStaticData.ShipConfig.DestroyedShipPrefab;
 
     public Vector3 Forward => _rotation * Vector3.forward;
+    public bool IsDestroying { get; private set; }
     public bool IsDisposed { get; private set; }
+    public Collider[] Colliders { get; private set; }
 
-    private bool CanFire => HP > 0 && _cooldowns.Any(c => c <= 0);
+    public int HP
+    {
+        get => _hp;
+        set
+        {
+            var hpBefore = _hp;
+            _hp = value;
+            HpChanged(_hp - hpBefore);
+            if (_hp <= 0 && IsDestroying == false)
+            {
+                Colliders = Array.Empty<Collider>();
+                IsDestroying = true;
+                DestroyStarted();
+            }
+        }
+    }
 
     public Vector3 Position
     {

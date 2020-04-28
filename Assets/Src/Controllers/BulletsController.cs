@@ -57,7 +57,8 @@ public class BulletsController : IInitializable, ITickable, IDisposable
 
     private bool ProcessBounds(BulletModel bulletModel)
     {
-        return bulletModel.Transform.position.magnitude > _screenBoundsProvider.Bounds.height * 2;
+        var bulletPosition = bulletModel.Transform.position;
+        return (new Vector2(bulletPosition.x, bulletPosition.z) - _screenBoundsProvider.Bounds.center).magnitude > _screenBoundsProvider.Bounds.height * 2;
     }
 
     private void RemoveBullet(int modelIndex, GameObject gameObject)
@@ -71,10 +72,12 @@ public class BulletsController : IInitializable, ITickable, IDisposable
         var playerShipModel = _playerShipModelsProvider.ShipModel;
         if (bulletModel.Team == playerShipModel.Team)
         {
-            if (_enemyShipModelsProvider.Models.Count > 0)
+            if (_enemyShipModelsProvider.Models.Any(m => m.HP > 0))
             {
                 var bulletPosition = bulletModel.Transform.position;
                 var closestEnemy = _enemyShipModelsProvider.Models
+                    .Where(m => m.HP > 0)
+                    .DefaultIfEmpty()
                     .Aggregate((min, m) =>
                         min == null
                         || (m.Position - bulletPosition).magnitude < (min.Position - bulletPosition).magnitude

@@ -38,7 +38,7 @@ public class EnemyShipsController : ITickable
 
     private bool ProcessBounds(EnemyShipModel enemyShip)
     {
-        return enemyShip.Position.z < -_screenBoundsProvider.Bounds.height * 2;
+        return enemyShip.Position.z < _screenBoundsProvider.Bounds.center.y - _screenBoundsProvider.Bounds.height * 2;
     }
 
     private void UpdateEnemyShipBehaviour(EnemyShipModel enemyShip, ShipModel playerShip)
@@ -57,7 +57,7 @@ public class EnemyShipsController : ITickable
             ProcessMoveFromTargetState(moveFromTarget, enemyShip);
         }
 
-        enemyShip.Position += enemyShip.Forward.normalized * enemyShip.Speed - new Vector3(0, 0, playerShip.Speed);
+        enemyShip.Position += enemyShip.Forward.normalized * enemyShip.Speed;
     }
 
     private void ProcessMoveToTargetState(AIMoveToTargetState moveToTarget, EnemyShipModel enemyShip, Vector3 userShipPosition)

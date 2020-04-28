@@ -2,8 +2,8 @@
 
 public class PlayerShipModel : ShipModel
 {
-    public PlayerShipModel(Vector3[] weaponSlotlocalPositions, Collider[] colliders, ShipData shipStaticData)
-        : base(TeamId.Player, weaponSlotlocalPositions, colliders, shipStaticData)
+    public PlayerShipModel(Collider[] colliders, ShipData shipStaticData)
+        : base(TeamId.Player, colliders, shipStaticData)
     {
     }
 }

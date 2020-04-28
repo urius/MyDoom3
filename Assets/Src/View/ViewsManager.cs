@@ -54,6 +54,11 @@ public class GameObjectsPool
 
     public GameObject Get(Vector3 position, Quaternion rotation)
     {
+        if (_views.Any(v => v == null))
+        {
+            Debug.Break();
+        }
+
         var view = _views.FirstOrDefault(v => !v.activeSelf);
         if (view == null)
         {
