@@ -20,7 +20,7 @@ public class PlayerMovementController : ITickable
 
     public void Tick()
     {
-        if (_playerShipModelProvider.ShipModel == null)
+        if (_playerShipModelProvider.ShipModel == null || _playerShipModelProvider.ShipModel.IsDestroyState)
         {
             return;
         }

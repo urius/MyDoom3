@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 public class EnemyShipsController : ITickable
@@ -24,7 +25,7 @@ public class EnemyShipsController : ITickable
         while (i < _enemyShipModelsProvider.Models.Count)
         {
             var enemyShip = _enemyShipModelsProvider.Models[i];
-            if (ProcessBounds(enemyShip))
+            if (ProcessBounds(enemyShip) || ProcessDestroyDuration(enemyShip))
             {
                 _enemyShipModelsProvider.Models.RemoveAt(i);
                 enemyShip.Dispose();
@@ -36,6 +37,16 @@ public class EnemyShipsController : ITickable
         }
     }
 
+    private bool ProcessDestroyDuration(EnemyShipModel enemyShip)
+    {
+        if (enemyShip.IsDestroyState)
+        {
+            enemyShip.DestroyDurationFrames++;
+        }
+
+        return enemyShip.DestroyDurationFrames > ShipModel.DestroyDurationThresholdFrames;
+    }
+
     private bool ProcessBounds(EnemyShipModel enemyShip)
     {
         return enemyShip.Position.z < _screenBoundsProvider.Bounds.center.y - _screenBoundsProvider.Bounds.height * 2;
@@ -43,18 +54,21 @@ public class EnemyShipsController : ITickable
 
     private void UpdateEnemyShipBehaviour(EnemyShipModel enemyShip, ShipModel playerShip)
     {
-        if (enemyShip.AIState is AIFlyForwardState flyForward)
+        if (!enemyShip.IsDestroyState)
         {
-            ProcessFlyStraightState(enemyShip);
-        }
-        else if (enemyShip.AIState is AIMoveToTargetState moveToTarget)
-        {
-            ProcessMoveToTargetState(moveToTarget, enemyShip, playerShip.Position);
-            enemyShip.FireAllWeapons();
-        }
-        else if (enemyShip.AIState is AIMoveFromTargetState moveFromTarget)
-        {
-            ProcessMoveFromTargetState(moveFromTarget, enemyShip);
+            if (enemyShip.AIState is AIFlyForwardState flyForward)
+            {
+                ProcessFlyStraightState(enemyShip);
+            }
+            else if (enemyShip.AIState is AIMoveToTargetState moveToTarget)
+            {
+                ProcessMoveToTargetState(moveToTarget, enemyShip, playerShip.Position);
+                enemyShip.FireAllWeapons();
+            }
+            else if (enemyShip.AIState is AIMoveFromTargetState moveFromTarget)
+            {
+                ProcessMoveFromTargetState(moveFromTarget, enemyShip);
+            }
         }
 
         enemyShip.Position += enemyShip.Forward.normalized * enemyShip.Speed;

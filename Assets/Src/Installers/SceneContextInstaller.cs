@@ -26,6 +26,8 @@ public class SceneContextInstaller : MonoInstaller
             .AsSingle();
         Container.BindInterfacesAndSelfTo<ViewsManager>()
             .AsSingle();
+        Container.BindInterfacesAndSelfTo<TickProvider>()
+            .AsSingle();
     }
 
     private void RegisterControllerFromComponent<TController>()

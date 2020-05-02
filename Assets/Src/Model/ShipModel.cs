@@ -11,7 +11,11 @@ public class ShipModel
     public event Action<int> HpChanged = delegate { };
     public event Action DestroyStarted = delegate { };
 
+    public const int DestroyDurationThresholdFrames = 500;
+
     public readonly TeamId Team;
+
+    public int DestroyDurationFrames;
 
     protected readonly ShipData _shipStaticData;
 
@@ -23,10 +27,10 @@ public class ShipModel
     private Quaternion _rotation;
     private int _hp;
 
-    public ShipModel(TeamId team, Collider[] colliders, ShipData shipStaticData)
+
+    public ShipModel(TeamId team, ShipData shipStaticData)
     {
         Team = team;
-        Colliders = colliders;
 
         _shipStaticData = shipStaticData;
 
@@ -42,13 +46,13 @@ public class ShipModel
     public float Speed => _shipStaticData.ShipConfig.Speed;
     public float Mobility => _shipStaticData.ShipConfig.Mobility;
     public float RotationSpeed => _shipStaticData.ShipConfig.RotationSpeed;
+    public GameObject ShipPrefab => _shipStaticData.ShipConfig.ShipPrefab;
     public GameObject ExplosionPrefab => _shipStaticData.ShipConfig.ExplosionPrefab;
     public GameObject DestroyedShipPrefab => _shipStaticData.ShipConfig.DestroyedShipPrefab;
 
     public Vector3 Forward => _rotation * Vector3.forward;
-    public bool IsDestroying { get; private set; }
+    public bool IsDestroyState { get; private set; }
     public bool IsDisposed { get; private set; }
-    public Collider[] Colliders { get; private set; }
 
     public int HP
     {
@@ -58,10 +62,9 @@ public class ShipModel
             var hpBefore = _hp;
             _hp = value;
             HpChanged(_hp - hpBefore);
-            if (_hp <= 0 && IsDestroying == false)
+            if (_hp <= 0 && IsDestroyState == false)
             {
-                Colliders = Array.Empty<Collider>();
-                IsDestroying = true;
+                IsDestroyState = true;
                 DestroyStarted();
             }
         }

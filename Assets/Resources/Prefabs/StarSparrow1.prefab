@@ -114,6 +114,7 @@ MonoBehaviour:
   _colliders:
   - {fileID: 65861728141062150}
   - {fileID: 4608226512307772459}
+  _bounds: []
 --- !u!1 &1692945755674982
 GameObject:
   m_ObjectHideFlags: 0

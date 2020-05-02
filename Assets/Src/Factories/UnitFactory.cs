@@ -37,20 +37,20 @@ public class UnitFactory : MonoBehaviour, IUnitFactory
 
     public PlayerShipModel CreatePlayerShip(ShipDataMin shipDataMin)
     {
-        var (go, colliders, staticData) = CreateShip(shipDataMin);
-        var model = new PlayerShipModel(colliders, staticData);
+        var staticData = CreateShip(shipDataMin);
+        var model = new PlayerShipModel(staticData);
         _playerShipModelHolder.ShipModel = model;
-        _diContainer.Instantiate<ShipMediator>(new object[] { model, go });
+        _diContainer.Instantiate<ShipMediator>(new object[] { model });
 
         return model;
     }
 
     public EnemyShipModel CreateEnemyShip(ShipDataMin shipDataMin)
     {
-        var (go, colliders, shipData) = CreateShip(shipDataMin);
-        var model = new EnemyShipModel(colliders, shipData);
+        var shipData = CreateShip(shipDataMin);
+        var model = new EnemyShipModel(shipData);
         _enemyShipsModelsProvider.AddShip(model);
-        _diContainer.Instantiate<ShipMediator>(new object[] { model, go });
+        _diContainer.Instantiate<ShipMediator>(new object[] { model });
 
         model.Rotation = Quaternion.LookRotation(-model.Forward, Vector3.up);
         var rndPos = UnityEngine.Random.insideUnitCircle * _screenBoundsProvider.Bounds.width;
@@ -60,15 +60,12 @@ public class UnitFactory : MonoBehaviour, IUnitFactory
         return model;
     }
 
-    private (GameObject, Collider[], ShipData) CreateShip(ShipDataMin shipDataMin)
+    private ShipData CreateShip(ShipDataMin shipDataMin)
     {
         var shipConfig = _shipsConfigProvider.GetConfigByShipType(shipDataMin.ShipType);
         var weaponsConfig = shipDataMin.WeaponIds.Select(_weaponsConfigProvider.GetConfigByWeaponId).ToArray();
         var shipData = new ShipData(shipConfig, weaponsConfig);
 
-        var go = Instantiate(shipConfig.ShipPrefab);
-        var colliders = go.GetComponent<CollidersComponent>().Colliders;
-
-        return (go, colliders, shipData);
+        return shipData;
     }
 }
