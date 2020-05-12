@@ -16,3 +16,5 @@ MonoBehaviour:
     type: 2}
   _bulletsConfigProvider: {fileID: 11400000, guid: 20df83e5ee6714c0aa63d79f35a74802,
     type: 2}
+  _localizationProvider: {fileID: 11400000, guid: d27218631662c463a82c1508a7fcb597,
+    type: 2}

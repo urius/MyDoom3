@@ -14,13 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _configs:
   - ShipType: 0
+    NameId: star_sparrow
     ShipPrefab: {fileID: 1510364872509504, guid: 118fca5fb5e744a8fb87c6b97752ab4e,
       type: 3}
-    ExplosionPrefab: {fileID: 7195415699897181550, guid: 78e516a900eff4af7bf187ffa2adbfbc,
+    ExplosionPrefab: {fileID: 7195415699897181550, guid: bba99864699cb4468ab49c437e5c33fb,
       type: 3}
     DestroyedShipPrefab: {fileID: 1820494407919854, guid: aadb3bd27df1a4762b34a3f98546c4a0,
       type: 3}
     Speed: 0.5
     Mobility: 0.1
     RotationSpeed: 2
+    HP: 70
+    Cost: 3000
+  - ShipType: 1
+    NameId: star_raven
+    ShipPrefab: {fileID: 1570034556958308, guid: 68435df5948e84954bf6bec7b4e1d9ca,
+      type: 3}
+    ExplosionPrefab: {fileID: 7195415699897181550, guid: bba99864699cb4468ab49c437e5c33fb,
+      type: 3}
+    DestroyedShipPrefab: {fileID: 1565955372155944, guid: 43fa8fa6c31364603b02880055352d11,
+      type: 3}
+    Speed: 0.55
+    Mobility: 0.11
+    RotationSpeed: 2
     HP: 50
+    Cost: 5000

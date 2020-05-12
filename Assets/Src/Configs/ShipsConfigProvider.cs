@@ -12,17 +12,21 @@ public class ShipsConfigProvider : ScriptableObject
     {
         return _configs.First(c => c.ShipType == shipType);
     }
+
+    public ShipConfig[] Configs => _configs;
 }
 
 public enum ShipType
 {
     StarSparrow,
+    StarRaven,
 }
 
 [Serializable]
 public class ShipConfig
 {
     public ShipType ShipType;
+    public string NameId;
     public GameObject ShipPrefab;
     public GameObject ExplosionPrefab;
     public GameObject DestroyedShipPrefab;
@@ -30,5 +34,6 @@ public class ShipConfig
     public float Mobility;
     public float RotationSpeed;
     public int HP;
+    public int Cost;
 }
 
