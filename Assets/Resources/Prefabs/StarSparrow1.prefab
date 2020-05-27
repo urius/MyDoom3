@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33144904916599870}
   - component: {fileID: 23649099192709106}
   - component: {fileID: 940554181378324044}
+  - component: {fileID: 3153099788020407576}
   - component: {fileID: 7683464418074707389}
   m_Layer: 0
   m_Name: StarSparrow1
@@ -34,6 +35,8 @@ Transform:
   - {fileID: 4459242769065246}
   - {fileID: 7980908870120643502}
   - {fileID: 1581901893141524415}
+  - {fileID: 2353883915589827024}
+  - {fileID: 7705520346371896410}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -99,6 +102,22 @@ MonoBehaviour:
   _weaponSlots:
   - {fileID: 7980908870120643502}
   - {fileID: 1581901893141524415}
+--- !u!114 &3153099788020407576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510364872509504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b33110c7f64e44539e2f9a3b6620761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shieldSlots:
+  - {fileID: 2353883915589827024}
+  _engineSlots:
+  - {fileID: 7705520346371896410}
 --- !u!114 &7683464418074707389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +133,6 @@ MonoBehaviour:
   _colliders:
   - {fileID: 65861728141062150}
   - {fileID: 4608226512307772459}
-  _bounds: []
 --- !u!1 &1692945755674982
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +209,66 @@ Transform:
   m_Father: {fileID: 4433942057210488}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3387929822549516555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7705520346371896410}
+  m_Layer: 0
+  m_Name: EngineSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7705520346371896410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3387929822549516555}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4433942057210488}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3743795470000219637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2353883915589827024}
+  m_Layer: 0
+  m_Name: ShieldSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2353883915589827024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743795470000219637}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4433942057210488}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4554921193213237309
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +325,7 @@ GameObject:
   m_Layer: 0
   m_Name: WeaponSlot2
   m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -277,7 +355,7 @@ GameObject:
   m_Layer: 0
   m_Name: WeaponSlot1
   m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

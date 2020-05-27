@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f7b2fc3c90d4fd78cceb6370d0dfc5, type: 3}
   m_Name: ConfigInstaller
   m_EditorClassIdentifier: 
+  _localizationProvider: {fileID: 11400000, guid: d27218631662c463a82c1508a7fcb597,
+    type: 2}
   _shipsConfigProvider: {fileID: 11400000, guid: 0e04745e17f764c1e9f8c744203c7501,
     type: 2}
   _bulletsConfigProvider: {fileID: 11400000, guid: 20df83e5ee6714c0aa63d79f35a74802,
     type: 2}
-  _localizationProvider: {fileID: 11400000, guid: d27218631662c463a82c1508a7fcb597,
+  _shieldsConfigProvider: {fileID: 11400000, guid: ab7dfd77f2344404aaa73ad3cca567be,
     type: 2}
