@@ -26,7 +26,7 @@ public enum BulletType
 }
 
 [Serializable]
-public class WeaponConfig
+public class WeaponConfig : EquipmentBase
 {
     public WeaponId WeaponId;
     public BulletType Type;
@@ -35,4 +35,6 @@ public class WeaponConfig
     public int CooldownFrames;
     public GameObject BulletPrefab;
     public GameObject SparksPrefab;
+
+    public override EquipmentType EquipmentType => EquipmentType.Weapon;
 }

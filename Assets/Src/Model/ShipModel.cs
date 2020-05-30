@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public class ShipModel
 
     protected readonly ShipData _shipStaticData;
 
-    private readonly WeaponConfig[] _weaponConfigs;
+    private readonly IReadOnlyList<WeaponConfig> _weaponConfigs;
     private readonly int[] _cooldownStartValues;
     private readonly int[] _cooldowns;
 

@@ -61,3 +61,8 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+#Custom
+Assets/_SCI-FI_Barrels_40_Sample*
+Assets/UIPack*
+Assets/SciFi_Battery_Pack_free*
