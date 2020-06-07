@@ -61,3 +61,39 @@ MonoBehaviour:
       En: charging speed
     - LocalizationItemId: cost
       En: cost
+    - LocalizationItemId: speed
+      En: speed
+    - LocalizationItemId: mobility
+      En: mobility
+    - LocalizationItemId: damage
+      En: damage
+    - LocalizationItemId: weapon_cooldown
+      En: cooldown
+  - LocalizationGroupId: 5
+    LocalizationItems:
+    - LocalizationItemId: red_laser_lite
+      En: Red Laser Lite
+    - LocalizationItemId: red_laser
+      En: Red Laser
+    - LocalizationItemId: green_laser
+      En: Green Laser
+    - LocalizationItemId: blue_laser
+      En: Blue Laser
+    - LocalizationItemId: yellow_laser_x2
+      En: Double Yellow Laser
+    - LocalizationItemId: gun_x2
+      En: Double Gun
+    - LocalizationItemId: minigun
+      En: Minigun
+  - LocalizationGroupId: 6
+    LocalizationItems:
+    - LocalizationItemId: rocket_engine
+      En: Rocket Engine
+    - LocalizationItemId: rocket_engine_x2
+      En: Double Rocket Engine
+    - LocalizationItemId: nuclear_engine
+      En: Nuclear Engine
+    - LocalizationItemId: nuclear_engine_x2
+      En: Double Nuclear Engine
+    - LocalizationItemId: quantum_engine
+      En: Quantum Engine

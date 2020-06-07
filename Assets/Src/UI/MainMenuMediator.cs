@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 public class MainMenuMediator : MonoBehaviour
 {
+    [SerializeField]
+    private Button _inventoryButton;
     [SerializeField]
     private Button _shipsButton;
     [SerializeField]
@@ -24,12 +23,14 @@ public class MainMenuMediator : MonoBehaviour
     {
         _shipsButton.onClick.AddListener(OnShipsClick);
         _equipmentButton.onClick.AddListener(OnEquipmentShopClick);
+        _inventoryButton.onClick.AddListener(OnInventoryClick);
     }
 
     private void OnDisable()
     {
         _shipsButton.onClick.RemoveAllListeners();
         _equipmentButton.onClick.RemoveAllListeners();
+        _inventoryButton.onClick.RemoveAllListeners();
     }
 
     private void OnShipsClick()
@@ -40,5 +41,10 @@ public class MainMenuMediator : MonoBehaviour
     private void OnEquipmentShopClick()
     {
         _eventsAggregator.EquipmentShopClicked(this.gameObject);
+    }
+
+    private void OnInventoryClick()
+    {
+        _eventsAggregator.InventoryClicked(this.gameObject);
     }
 }

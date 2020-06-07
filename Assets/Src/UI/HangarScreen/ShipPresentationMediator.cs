@@ -52,6 +52,23 @@ public class ShipPresentationMediator : MonoBehaviour
         CreateSlotsOnShip(EquipmentType.Weapon, weaponsComponent.WeaponTransforms, _slotPrefab);
         CreateSlotsOnShip(EquipmentType.Engine, equipmentComponent.EngineSlots, _slotPrefab);
         CreateSlotsOnShip(EquipmentType.Shield, equipmentComponent.ShieldSlots, _slotPrefab);
+
+        ShowAllEquipment();
+    }
+
+    private void ShowAllEquipment()
+    {
+        foreach (var kvp in _slotsByType)
+        {
+            for (var i = 0; i < kvp.Value.Count; i++)
+            {
+                var equipment = _playerDataModel.ShipData.GetEquipment(kvp.Key, i);
+                if (equipment != null)
+                {
+                    ShowEquipmentItem(i, equipment);
+                }
+            }
+        }
     }
 
     private void OnDisable()
@@ -90,6 +107,11 @@ public class ShipPresentationMediator : MonoBehaviour
     }
 
     private void OnEquipmentSet(int slotIndex, EquipmentBase equipment)
+    {
+        ShowEquipmentItem(slotIndex, equipment);
+    }
+
+    private void ShowEquipmentItem(int slotIndex, EquipmentBase equipment)
     {
         _slotsByType[equipment.EquipmentType][slotIndex].SetSpriteIcon(equipment.IconSprite);
     }

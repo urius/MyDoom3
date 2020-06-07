@@ -1,21 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Zenject;
 
 public class PlayerDataModel
 {
+    private const string SaveFileName = "pd.sv";
+
     public event Action<EquipmentBase> InventoryEquipmentRemoved = delegate { };
     public event Action<int, EquipmentBase> InventoryEquipmentSet = delegate { };
+    public event Action RequestSave = delegate { };
+
+    private readonly TaskCompletionSource<bool> _dataLoadedTsc = new TaskCompletionSource<bool>();
+
     public int Money;
     public int Exp;
     public ShipData ShipData;
 
     private List<EquipmentBase> _inventoryEqipments = new List<EquipmentBase>();
+    private readonly ModelsFactory _modelsFactory;
+    private readonly DefaultPlayerDataProvider _defaultPlayerDataProvider;
 
-    public PlayerDataModel()
+    [Inject]
+    public PlayerDataModel(
+        ModelsFactory modelsFactory,
+        DefaultPlayerDataProvider defaultPlayerDataProvider)
     {
+        _modelsFactory = modelsFactory;
+       _defaultPlayerDataProvider = defaultPlayerDataProvider;
     }
 
     public ShipConfig ShipConfig => ShipData.ShipConfig;
+    public IReadOnlyList<EquipmentBase> InventoryEqipments => _inventoryEqipments;
+    public Task DataLoadedTask => _dataLoadedTsc.Task;
 
     public void AddInventoryEquipment(EquipmentBase equipment)
     {
@@ -44,5 +62,54 @@ public class PlayerDataModel
         return _inventoryEqipments.IndexOf(equipment) > -1;
     }
 
-    public IReadOnlyList<EquipmentBase> InventoryEqipments => _inventoryEqipments;
+    public void Save()
+    {
+        SaveLoadHelper.SaveSerialized(toPlayerDataMin(), SaveFileName);
+    }
+
+    public void Load()
+    {
+        if (!SaveLoadHelper.TryLoadSerialized<PlayerDataMin>(SaveFileName, out var data))
+        {
+            data = _defaultPlayerDataProvider.PlayerData;
+        }
+
+        initFromMinData(data);
+
+        _dataLoadedTsc.TrySetResult(true);
+    }
+
+    private PlayerDataMin toPlayerDataMin()
+    {
+        return new PlayerDataMin(
+            Money,
+            Exp,
+            ShipData.ToShipDataMin(),
+            _inventoryEqipments.Select(e => e.ToEquipmentMin()).ToArray());
+    }
+
+    private void initFromMinData(PlayerDataMin dataMin)
+    {
+        Money = dataMin.Money;
+        Exp = dataMin.Exp;
+        ShipData = _modelsFactory.CreateShipData(dataMin.ShipData);
+        _inventoryEqipments = dataMin.InventoryEqipmentsMin.Select(_modelsFactory.CreateEquipment).ToList();
+    }
+}
+
+[Serializable]
+public class PlayerDataMin
+{
+    public PlayerDataMin(int money, int exp, ShipDataMin shipData, EquipmentMin[] inventoryEqipmentsMin)
+    {
+        Money = money;
+        Exp = exp;
+        ShipData = shipData;
+        InventoryEqipmentsMin = inventoryEqipmentsMin;
+    }
+
+    public int Money;
+    public int Exp;
+    public ShipDataMin ShipData;
+    public EquipmentMin[] InventoryEqipmentsMin;
 }

@@ -12,6 +12,8 @@ public class ConfigInstaller : ScriptableObjectInstaller<ConfigInstaller>
     private WeaponsConfigProvider _bulletsConfigProvider;
     [SerializeField]
     private ShieldsConfigProvider _shieldsConfigProvider;
+    [SerializeField]
+    private EnginesConfigProvider _enginesConfigProvider;
 
     public override void InstallBindings()
     {
@@ -19,5 +21,6 @@ public class ConfigInstaller : ScriptableObjectInstaller<ConfigInstaller>
         Container.BindInstance(_shipsConfigProvider);
         Container.BindInstance(_bulletsConfigProvider);
         Container.BindInstance(_shieldsConfigProvider);
+        Container.BindInstance(_enginesConfigProvider);
     }
 }

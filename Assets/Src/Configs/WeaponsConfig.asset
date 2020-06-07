@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: WeaponsConfig
   m_EditorClassIdentifier: 
   _configs:
-  - WeaponId: 0
+  - Prefab: {fileID: 2873079707626509309, guid: 98a0b4512d22e43dd9eed36058e0b0fa,
+      type: 3}
+    IconSprite: {fileID: 21300000, guid: fe0a62d625bed4e1aa9282fd9112d60e, type: 3}
+    NameId: red_laser_lite
+    HideForPlayer: 1
+    Cost: 0
+    WeaponId: 7
     Type: 0
     BulletSpeed: 4
     Damage: 1
@@ -22,12 +28,92 @@ MonoBehaviour:
       type: 3}
     SparksPrefab: {fileID: 24320280783056391, guid: 11dd4e056ae93418aafc1b44812da1df,
       type: 3}
-  - WeaponId: 1
+  - Prefab: {fileID: 2873079707626509309, guid: 98a0b4512d22e43dd9eed36058e0b0fa,
+      type: 3}
+    IconSprite: {fileID: 21300000, guid: fe0a62d625bed4e1aa9282fd9112d60e, type: 3}
+    NameId: red_laser
+    HideForPlayer: 0
+    Cost: 0
+    WeaponId: 1
     Type: 0
     BulletSpeed: 4
     Damage: 15
     CooldownFrames: 8
     BulletPrefab: {fileID: 1300982250374789771, guid: b6995e523d4954b229df89eec612c835,
+      type: 3}
+    SparksPrefab: {fileID: 24320280783056391, guid: 11dd4e056ae93418aafc1b44812da1df,
+      type: 3}
+  - Prefab: {fileID: 7842829417879496076, guid: b047ce576918c4be89e3db2c8c1328bc,
+      type: 3}
+    IconSprite: {fileID: 21300000, guid: e5db0a6f010ce4aa4a23ecfe7440cdc6, type: 3}
+    NameId: green_laser
+    HideForPlayer: 0
+    Cost: 0
+    WeaponId: 2
+    Type: 0
+    BulletSpeed: 4
+    Damage: 15
+    CooldownFrames: 8
+    BulletPrefab: {fileID: 1300982250374789771, guid: 36477a33104384f54838ebdf3152eb53,
+      type: 3}
+    SparksPrefab: {fileID: 24320280783056391, guid: 11dd4e056ae93418aafc1b44812da1df,
+      type: 3}
+  - Prefab: {fileID: 7821358295098713769, guid: fd9c560aa6b584bd69514cd7fa135703,
+      type: 3}
+    IconSprite: {fileID: 21300000, guid: 665f530bedd3a4101b16714d93ff0ab1, type: 3}
+    NameId: blue_laser
+    HideForPlayer: 0
+    Cost: 0
+    WeaponId: 3
+    Type: 0
+    BulletSpeed: 4
+    Damage: 15
+    CooldownFrames: 8
+    BulletPrefab: {fileID: 1300982250374789771, guid: bfe29bc39e27e4aa9ba9c6ba8d79b7f2,
+      type: 3}
+    SparksPrefab: {fileID: 24320280783056391, guid: 11dd4e056ae93418aafc1b44812da1df,
+      type: 3}
+  - Prefab: {fileID: 435057194454473118, guid: 39147f30bc74e4d45b0ffa0203c8dcdb, type: 3}
+    IconSprite: {fileID: 21300000, guid: da83aef3838084784be1d799dbab4ce6, type: 3}
+    NameId: yellow_laser_x2
+    HideForPlayer: 0
+    Cost: 0
+    WeaponId: 4
+    Type: 0
+    BulletSpeed: 4
+    Damage: 15
+    CooldownFrames: 8
+    BulletPrefab: {fileID: 1300982250374789771, guid: 8b7545f49afe8482f80ca2065d14e950,
+      type: 3}
+    SparksPrefab: {fileID: 24320280783056391, guid: 11dd4e056ae93418aafc1b44812da1df,
+      type: 3}
+  - Prefab: {fileID: 5326580986462134408, guid: d9ea984bac97148fe966b7675a864942,
+      type: 3}
+    IconSprite: {fileID: 21300000, guid: d19f4d36f20f4408c8662a757c39d6ae, type: 3}
+    NameId: gun_x2
+    HideForPlayer: 0
+    Cost: 0
+    WeaponId: 5
+    Type: 0
+    BulletSpeed: 4
+    Damage: 15
+    CooldownFrames: 8
+    BulletPrefab: {fileID: 1300982250374789771, guid: 124817993b4e940b4a171aa171f7f9e9,
+      type: 3}
+    SparksPrefab: {fileID: 24320280783056391, guid: 11dd4e056ae93418aafc1b44812da1df,
+      type: 3}
+  - Prefab: {fileID: 5208828931817368250, guid: e28dfb415dfb34756a2a4c18abd739a6,
+      type: 3}
+    IconSprite: {fileID: 21300000, guid: 1150d5271d5064755bbcc976b56d21d3, type: 3}
+    NameId: minigun
+    HideForPlayer: 0
+    Cost: 0
+    WeaponId: 6
+    Type: 0
+    BulletSpeed: 4
+    Damage: 15
+    CooldownFrames: 8
+    BulletPrefab: {fileID: 1300982250374789771, guid: 124817993b4e940b4a171aa171f7f9e9,
       type: 3}
     SparksPrefab: {fileID: 24320280783056391, guid: 11dd4e056ae93418aafc1b44812da1df,
       type: 3}

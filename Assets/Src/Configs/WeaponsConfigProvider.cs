@@ -12,17 +12,25 @@ public class WeaponsConfigProvider : ScriptableObject
     {
         return _configs.First(c => c.WeaponId == weapon);
     }
+
+    public WeaponConfig[] Configs => _configs;
 }
 
 public enum WeaponId
 {
-    RedLaserLite,
+    Undefined,
     RedLaserMedium,
+    GreenLaserMedium,
+    BlueLaserMedium,
+    YellowLaserMedium,
+    GunMedium,
+    MiniGunHeavy,
+    RedLaserLite,
 }
 
 public enum BulletType
 {
-    Laser,
+    StraightBullet,
 }
 
 [Serializable]
@@ -37,4 +45,9 @@ public class WeaponConfig : EquipmentBase
     public GameObject SparksPrefab;
 
     public override EquipmentType EquipmentType => EquipmentType.Weapon;
+
+    public override EquipmentMin ToEquipmentMin()
+    {
+        return new EquipmentMin(EquipmentType, (int)WeaponId);
+    }
 }

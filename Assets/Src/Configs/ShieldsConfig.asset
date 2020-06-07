@@ -13,52 +13,59 @@ MonoBehaviour:
   m_Name: ShieldsConfig
   m_EditorClassIdentifier: 
   _configs:
-  - ShieldId: 0
-    Prefab: {fileID: 100000, guid: e6b30b13a06cf4d0da62fa31d1f42453, type: 3}
+  - Prefab: {fileID: 100000, guid: e6b30b13a06cf4d0da62fa31d1f42453, type: 3}
     IconSprite: {fileID: 21300000, guid: b4bd0bf95151841228041262d3833862, type: 3}
     NameId: shield_1
+    HideForPlayer: 0
+    Cost: 300
+    ShieldId: 7
     ChargingSpeed: 2
     Capacity: 20
-    Cost: 300
-  - ShieldId: 1
-    Prefab: {fileID: 100000, guid: 2f7ef2dca95dd4fb18c5d86deee8f81a, type: 3}
+  - Prefab: {fileID: 100000, guid: 2f7ef2dca95dd4fb18c5d86deee8f81a, type: 3}
     IconSprite: {fileID: 21300000, guid: 5d0ce4ad9176e458d921e739d603f583, type: 3}
     NameId: shield_2
+    HideForPlayer: 0
+    Cost: 800
+    ShieldId: 1
     ChargingSpeed: 4
     Capacity: 30
-    Cost: 800
-  - ShieldId: 2
-    Prefab: {fileID: 100000, guid: b59a4cd9b0efc41f5918648ff26736e3, type: 3}
+  - Prefab: {fileID: 100000, guid: b59a4cd9b0efc41f5918648ff26736e3, type: 3}
     IconSprite: {fileID: 21300000, guid: 9525bc26d06774731b96e52a46b44171, type: 3}
     NameId: shield_3
+    HideForPlayer: 0
+    Cost: 1800
+    ShieldId: 2
     ChargingSpeed: 6
     Capacity: 70
-    Cost: 1800
-  - ShieldId: 3
-    Prefab: {fileID: 100000, guid: c6df2e0849c8b4494bba68ac5ae6738e, type: 3}
+  - Prefab: {fileID: 100000, guid: c6df2e0849c8b4494bba68ac5ae6738e, type: 3}
     IconSprite: {fileID: 21300000, guid: d48454b62675744e8affc654781ebd2e, type: 3}
     NameId: shield_4
+    HideForPlayer: 0
+    Cost: 4000
+    ShieldId: 3
     ChargingSpeed: 12
     Capacity: 100
-    Cost: 4000
-  - ShieldId: 4
-    Prefab: {fileID: 1000014142393632, guid: b1b88de1f14472c48a2128f06a2a92f9, type: 3}
+  - Prefab: {fileID: 1000014142393632, guid: b1b88de1f14472c48a2128f06a2a92f9, type: 3}
     IconSprite: {fileID: 21300000, guid: 4223dd541921e41aba7607616093aa9a, type: 3}
     NameId: shield_5
+    HideForPlayer: 0
+    Cost: 8000
+    ShieldId: 4
     ChargingSpeed: 15
     Capacity: 150
-    Cost: 8000
-  - ShieldId: 5
-    Prefab: {fileID: 1000010147386554, guid: 13ca8a7d51b715a4582fd610ff4aa616, type: 3}
+  - Prefab: {fileID: 1000010147386554, guid: 13ca8a7d51b715a4582fd610ff4aa616, type: 3}
     IconSprite: {fileID: 21300000, guid: 2eac6ef7c36e9442bbf75033bd5afad2, type: 3}
     NameId: shield_6
+    HideForPlayer: 0
+    Cost: 15000
+    ShieldId: 5
     ChargingSpeed: 20
     Capacity: 200
-    Cost: 15000
-  - ShieldId: 6
-    Prefab: {fileID: 1000011940937682, guid: 689bce6208bc9f441bfad84d4492dd5d, type: 3}
+  - Prefab: {fileID: 1000011940937682, guid: 689bce6208bc9f441bfad84d4492dd5d, type: 3}
     IconSprite: {fileID: 21300000, guid: 64cb2e60372ae486793fd9178426b59f, type: 3}
     NameId: shield_7
+    HideForPlayer: 0
+    Cost: 25000
+    ShieldId: 6
     ChargingSpeed: 30
     Capacity: 250
-    Cost: 25000

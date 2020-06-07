@@ -31,24 +31,46 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 5afd683d3832f4c57b3c68b98d0f27b7, type: 3}
-    totalSpriteSurfaceArea: 114688
+    totalSpriteSurfaceArea: 294912
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 64cb2e60372ae486793fd9178426b59f, type: 3}
+  - {fileID: 21300000, guid: 0e46cac2be1d745f78151c754b085baa, type: 3}
+  - {fileID: 21300000, guid: da83aef3838084784be1d799dbab4ce6, type: 3}
   - {fileID: 21300000, guid: 4223dd541921e41aba7607616093aa9a, type: 3}
   - {fileID: 21300000, guid: 9525bc26d06774731b96e52a46b44171, type: 3}
+  - {fileID: 21300000, guid: d19f4d36f20f4408c8662a757c39d6ae, type: 3}
   - {fileID: 21300000, guid: d48454b62675744e8affc654781ebd2e, type: 3}
+  - {fileID: 21300000, guid: fe0a62d625bed4e1aa9282fd9112d60e, type: 3}
+  - {fileID: 21300000, guid: 1150d5271d5064755bbcc976b56d21d3, type: 3}
+  - {fileID: 21300000, guid: c2bc03d7ab6ad40c08c03ac0dabb2fe8, type: 3}
   - {fileID: 21300000, guid: 2eac6ef7c36e9442bbf75033bd5afad2, type: 3}
   - {fileID: 21300000, guid: b4bd0bf95151841228041262d3833862, type: 3}
+  - {fileID: 21300000, guid: 665f530bedd3a4101b16714d93ff0ab1, type: 3}
+  - {fileID: 21300000, guid: 72b1ff6cd53844a45b1aa35ac3f1371f, type: 3}
   - {fileID: 21300000, guid: 5d0ce4ad9176e458d921e739d603f583, type: 3}
+  - {fileID: 21300000, guid: 030a5ead73a5642f7b4fefa4d71a1451, type: 3}
+  - {fileID: 21300000, guid: e5db0a6f010ce4aa4a23ecfe7440cdc6, type: 3}
+  - {fileID: 21300000, guid: 79f244ff9b2ac4d6098fd110281a168e, type: 3}
   m_PackedSpriteNamesToIndex:
   - ShieldGreenNuclear3
+  - Engine1_x2
+  - WeaponDoubleYellowLaser
   - ShieldGreenNuclear1
   - ShieldGreenSingle
+  - WeaponDoubleGun
   - ShieldGreenDouble
+  - WeaponSimpleRedLaser
+  - WeaponMinigun
+  - Engine1
   - ShieldGreenNuclear2
   - ShieldBlueSingle
+  - WeaponSimpleBlueLaser
+  - Engine2_x2
   - ShieldBlueDouble
+  - Engine3
+  - WeaponSimpleGreenLaser
+  - Engine2
   m_Tag: RenderedIconsSprite
   m_IsVariant: 0

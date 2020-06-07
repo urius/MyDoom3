@@ -37,19 +37,13 @@ public class BuyShipScreenMediator : MonoBehaviour
     public void OnEnable()
     {
         _swapShipAnimator.SwitchAnimationStarted += OnSwitchAnimationStarted;
-        _buyButton.onClick.AddListener(OnShipClicked);
+        _buyButton.onClick.AddListener(OnBuyShipClicked);
     }
 
     public void Start()
     {
         _swapShipAnimator.ShowCurrentPrefab(CurrentShipConfig.ShipPrefab);
         UpdateTexts(_currentShipIndex, _shipConfigs);
-    }
-
-    public void OnDisable()
-    {
-        _swapShipAnimator.SwitchAnimationStarted -= OnSwitchAnimationStarted;
-        _buyButton.onClick.RemoveAllListeners();
     }
 
     public void OnSwitchRight()
@@ -70,7 +64,7 @@ public class BuyShipScreenMediator : MonoBehaviour
         _eventsAggregator.HomeClicked(this.gameObject);
     }
 
-    private void OnShipClicked()
+    private void OnBuyShipClicked()
     {
         _eventsAggregator.BuyShipClicked(CurrentShipConfig);
     }

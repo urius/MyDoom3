@@ -32,7 +32,16 @@ public class HangarScreenController : IInitializable, IDisposable
     {
         if (_playerDataModel.ShipData.IsEquipped(newEquipment))
         {
+            var fromSlotIndex = _playerDataModel.ShipData.GetEquipmentSlotIndex(newEquipment);
+
             _playerDataModel.ShipData.RemoveEquipment(newEquipment);
+
+            var existingEquipment = _playerDataModel.ShipData.GetEquipment(newEquipment.EquipmentType, slotIndex);
+            if (existingEquipment != null)
+            {
+                _playerDataModel.ShipData.RemoveEquipment(existingEquipment);
+                _playerDataModel.ShipData.SetupEquipment(fromSlotIndex, existingEquipment);
+            }
         }
         else
         {

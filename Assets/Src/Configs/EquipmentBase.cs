@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public enum EquipmentType
 {
@@ -14,4 +15,21 @@ public abstract class EquipmentBase
     public GameObject Prefab;
     public Sprite IconSprite;
     public string NameId;
+    public bool HideForPlayer;
+    public int Cost;
+
+    public abstract EquipmentMin ToEquipmentMin();
+}
+
+[Serializable]
+public class EquipmentMin
+{
+    public EquipmentType EquipmentType;
+    public int EquipmentId;
+
+    public EquipmentMin(EquipmentType equipmentType, int equipmentId)
+    {
+        EquipmentType = equipmentType;
+        EquipmentId = equipmentId;
+    }
 }

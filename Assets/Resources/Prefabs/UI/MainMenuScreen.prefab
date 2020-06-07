@@ -442,7 +442,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8058333646632403503}
   - component: {fileID: 8058333646632403506}
-  - component: {fileID: 8058333646632403505}
   - component: {fileID: 8058333646632403504}
   - component: {fileID: 8058333646632403507}
   - component: {fileID: 3506998602940193169}
@@ -460,7 +459,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8058333646632403502}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -497,28 +496,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &8058333646632403505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8058333646632403502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
 --- !u!114 &8058333646632403504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +531,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 50
+  m_Spacing: 80
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -573,6 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca83637476bb14f8cb80dd36a6956b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inventoryButton: {fileID: 8058333645935536215}
   _shipsButton: {fileID: 8058333647799923111}
   _equipmentButton: {fileID: 8058333647548425208}
 --- !u!1 &8058333647143194660

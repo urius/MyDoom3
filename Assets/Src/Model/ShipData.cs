@@ -6,9 +6,10 @@ public class ShipData
 {
     public event Action<int, EquipmentBase> EquipmentSet = delegate { };
     public event Action<int, EquipmentBase> EquipmentRemoved = delegate { };
-    
+
+    private readonly WeaponConfig[] _weaponsConfig;
+
     public readonly ShipConfig ShipConfig;
-    public readonly WeaponConfig[] _weaponsConfig;
 
     public ShipData(ShipConfig config, WeaponConfig[] weaponsConfig)
     {
@@ -16,8 +17,16 @@ public class ShipData
         _weaponsConfig = weaponsConfig;
     }
 
+    public ShipData(ShipConfig config, WeaponConfig[] weaponsConfig, EngineConfig engineConfig, ShieldConfig shieldConfig)
+        :this(config, weaponsConfig)
+    {
+        EngineConfig = engineConfig;
+        ShieldConfig = shieldConfig;
+    }
+
     public IReadOnlyList<WeaponConfig> WeaponsConfig => _weaponsConfig;
     public ShieldConfig ShieldConfig { get; private set; }
+    public EngineConfig EngineConfig { get; private set; }
 
     public void SetupEquipment(int slotIndex, EquipmentBase equipment)
     {
@@ -30,9 +39,10 @@ public class ShipData
                 ShieldConfig = (ShieldConfig)equipment;
                 break;
             case EquipmentType.Engine:
-                throw new NotImplementedException("EquipmentType.Engine is not implemented yet");
+                EngineConfig = (EngineConfig)equipment;
+                break;
         }
-        EquipmentSet(0, equipment);
+        EquipmentSet(slotIndex, equipment);
     }
 
     public EquipmentBase GetEquipment(EquipmentType type, int index)
@@ -66,7 +76,8 @@ public class ShipData
                     ShieldConfig = null;
                     break;
                 case EquipmentType.Engine:
-                    throw new NotImplementedException("EquipmentType.Engine is not implemented yet");
+                    EngineConfig = null;
+                    break;
             }
 
             EquipmentRemoved(index, equipment);
@@ -74,6 +85,15 @@ public class ShipData
         }
 
         return false;
+    }
+
+    public ShipDataMin ToShipDataMin()
+    {
+        return new ShipDataMin(
+            ShipConfig.ShipType,
+            _weaponsConfig.Select(w => w.WeaponId).ToArray(),
+            ShieldConfig.ShieldId,
+            EngineConfig.EngineId);
     }
 
     private EquipmentBase[] GetEquipmentsByType(EquipmentType type)
@@ -85,7 +105,7 @@ public class ShipData
             case EquipmentType.Shield:
                 return new EquipmentBase[] { ShieldConfig };
             case EquipmentType.Engine:
-                throw new NotImplementedException("EquipmentType.Engine is not implemented yet");
+                return new EquipmentBase[] { EngineConfig };
         }
 
         return new EquipmentBase[0];

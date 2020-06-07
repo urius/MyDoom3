@@ -11,6 +11,7 @@ public class Screenshot : MonoBehaviour
     [SerializeField] string folder = "Screenshots";
     [SerializeField] string filenamePrefix = "screenshot";
     [SerializeField] bool ensureTransparentBackground = false;
+    //[SerializeField] RenderTexture renderTexture;
 
     [ContextMenu("Take Screenshot")]
     public string TakeScreenshot()
@@ -26,6 +27,7 @@ public class Screenshot : MonoBehaviour
 
         // Create Render Texture with width and height.
         RenderTexture rt = new RenderTexture(width, height, 0, RenderTextureFormat.Default);
+        rt.depth = 24;
 
         // Assign Render Texture to camera.
         cam.targetTexture = rt;
@@ -58,7 +60,10 @@ public class Screenshot : MonoBehaviour
         RenderTexture.active = cam.targetTexture;
 
         // Make a new texture and read the active Render Texture into it.
-        Texture2D screenshot = new Texture2D(width, height, TextureFormat.ARGB32, false);
+        var textureWidth = cam.targetTexture.width;
+        var textureHeight = cam.targetTexture.width;
+
+        Texture2D screenshot = new Texture2D(textureWidth, textureHeight, TextureFormat.ARGB32, false);
         screenshot.ReadPixels(new Rect(0, 0, width, height), 0, 0, false);
 
         // Apply the changes to the screenshot texture.

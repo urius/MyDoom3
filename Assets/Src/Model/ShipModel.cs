@@ -20,7 +20,7 @@ public class ShipModel
 
     protected readonly ShipData _shipStaticData;
 
-    private readonly IReadOnlyList<WeaponConfig> _weaponConfigs;
+    private readonly IReadOnlyList<(WeaponConfig config, int slotIndex)> _installedWeaponConfigs;
     private readonly int[] _cooldownStartValues;
     private readonly int[] _cooldowns;
 
@@ -37,8 +37,8 @@ public class ShipModel
 
         HP = shipStaticData.ShipConfig.HP;
 
-        _weaponConfigs = shipStaticData.WeaponsConfig;
-        _cooldownStartValues = shipStaticData.WeaponsConfig.Select(c => c.CooldownFrames).ToArray();
+        _installedWeaponConfigs = shipStaticData.WeaponsConfig.Select((c, i) => (c, i)).Where(pair => pair.c != null).ToArray();
+        _cooldownStartValues = _installedWeaponConfigs.Select(p => p.config.CooldownFrames).ToArray();
         _cooldowns = (int[])_cooldownStartValues.Clone();
     }
 
@@ -110,7 +110,7 @@ public class ShipModel
             {
                 if (_cooldowns[i] <= 0)
                 {
-                    Fired(i, _weaponConfigs[i], Team);
+                    Fired(_installedWeaponConfigs[i].slotIndex, _installedWeaponConfigs[i].config, Team);
                     _cooldowns[i] = _cooldownStartValues[i];
                 }
             }

@@ -12,7 +12,7 @@ public class TabButtonView : MonoBehaviour
 
     public void SetSelected()
     {
-        _toggle.Select();
+        _toggle.isOn = true;
     }
 
     private void OnEnable()

@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6019f4df85d748e2a27fabc2652da5e, type: 3}
   m_Name: GlobalModelInstaller
   m_EditorClassIdentifier: 
+  _defaultPlayerDataProvider: {fileID: 11400000, guid: 1b0a231011fe141dfafbc914f51f6f52,
+    type: 2}

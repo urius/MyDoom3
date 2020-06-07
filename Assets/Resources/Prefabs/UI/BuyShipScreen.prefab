@@ -453,6 +453,7 @@ MonoBehaviour:
   _shipNameTxt: {fileID: 3847268212481193117}
   _pageCounterTxt: {fileID: 3737890879604778909}
   _shipInfoTxt: {fileID: 6798101505379286819}
+  _buyButton: {fileID: 2999023248361600625}
 --- !u!1 &715426239784222828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,17 +1409,17 @@ PrefabInstance:
     - target: {fileID: 689531120644903523, guid: e58c38d2100b34ec3982e1e39999a567,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.047912598
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 689531120644903523, guid: e58c38d2100b34ec3982e1e39999a567,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 689531120644903523, guid: e58c38d2100b34ec3982e1e39999a567,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 689531120644903523, guid: e58c38d2100b34ec3982e1e39999a567,
         type: 3}
@@ -1428,12 +1429,12 @@ PrefabInstance:
     - target: {fileID: 689531120644903523, guid: e58c38d2100b34ec3982e1e39999a567,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 689531120644903523, guid: e58c38d2100b34ec3982e1e39999a567,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 689531120644903523, guid: e58c38d2100b34ec3982e1e39999a567,
         type: 3}
@@ -1443,12 +1444,12 @@ PrefabInstance:
     - target: {fileID: 689531120644903523, guid: e58c38d2100b34ec3982e1e39999a567,
         type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 689531120644903523, guid: e58c38d2100b34ec3982e1e39999a567,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e58c38d2100b34ec3982e1e39999a567, type: 3}

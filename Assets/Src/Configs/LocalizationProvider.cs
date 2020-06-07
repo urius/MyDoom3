@@ -39,6 +39,8 @@ public enum LocalizationGroupId
     BuyShipScreen,
     BuyEquipmentScreen,
     Common,
+    WeaponNames,
+    EngineNames,
 }
 
 [Serializable]
