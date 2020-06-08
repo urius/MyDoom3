@@ -28,7 +28,7 @@ public class BuySellItemController : IInitializable, IDisposable
         _menuEventsAggregator.BuyShipClicked -= OnBuyShip;
     }
 
-    private void OnBuyEquipment(EquipmentBase equipment)
+    private void OnBuyEquipment(EquipmentConfigBase equipment)
     {
         _playerDataModel.AddInventoryEquipment(equipment);
         Debug.Log("l: " + _playerDataModel.InventoryEqipments.Count);

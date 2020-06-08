@@ -34,7 +34,7 @@ public enum BulletType
 }
 
 [Serializable]
-public class WeaponConfig : EquipmentBase
+public class WeaponConfig : EquipmentConfigBase
 {
     public WeaponId WeaponId;
     public BulletType Type;

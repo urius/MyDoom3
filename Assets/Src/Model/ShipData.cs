@@ -4,8 +4,8 @@ using System.Linq;
 
 public class ShipData
 {
-    public event Action<int, EquipmentBase> EquipmentSet = delegate { };
-    public event Action<int, EquipmentBase> EquipmentRemoved = delegate { };
+    public event Action<int, EquipmentConfigBase> EquipmentSet = delegate { };
+    public event Action<int, EquipmentConfigBase> EquipmentRemoved = delegate { };
 
     private readonly WeaponConfig[] _weaponsConfig;
 
@@ -28,7 +28,7 @@ public class ShipData
     public ShieldConfig ShieldConfig { get; private set; }
     public EngineConfig EngineConfig { get; private set; }
 
-    public void SetupEquipment(int slotIndex, EquipmentBase equipment)
+    public void SetupEquipment(int slotIndex, EquipmentConfigBase equipment)
     {
         switch (equipment.EquipmentType)
         {
@@ -45,23 +45,23 @@ public class ShipData
         EquipmentSet(slotIndex, equipment);
     }
 
-    public EquipmentBase GetEquipment(EquipmentType type, int index)
+    public EquipmentConfigBase GetEquipment(EquipmentType type, int index)
     {
         return GetEquipmentsByType(type)[index];
     }
 
-    public bool IsEquipped(EquipmentBase equipment)
+    public bool IsEquipped(EquipmentConfigBase equipment)
     {
         return GetEquipmentsByType(equipment.EquipmentType).Any(e => e == equipment);
     }
 
-    public int GetEquipmentSlotIndex(EquipmentBase equipment)
+    public int GetEquipmentSlotIndex(EquipmentConfigBase equipment)
     {
         var equpmentsArray = GetEquipmentsByType(equipment.EquipmentType);
         return Array.IndexOf(equpmentsArray, equipment);
     }
 
-    public bool RemoveEquipment(EquipmentBase equipment)
+    public bool RemoveEquipment(EquipmentConfigBase equipment)
     {
         var index = GetEquipmentSlotIndex(equipment);
 
@@ -96,18 +96,18 @@ public class ShipData
             EngineConfig.EngineId);
     }
 
-    private EquipmentBase[] GetEquipmentsByType(EquipmentType type)
+    private EquipmentConfigBase[] GetEquipmentsByType(EquipmentType type)
     {
         switch (type)
         {
             case EquipmentType.Weapon:
                 return _weaponsConfig;
             case EquipmentType.Shield:
-                return new EquipmentBase[] { ShieldConfig };
+                return new EquipmentConfigBase[] { ShieldConfig };
             case EquipmentType.Engine:
-                return new EquipmentBase[] { EngineConfig };
+                return new EquipmentConfigBase[] { EngineConfig };
         }
 
-        return new EquipmentBase[0];
+        return new EquipmentConfigBase[0];
     }
 }

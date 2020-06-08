@@ -6,14 +6,12 @@ public class EquipmentScrollView : MonoBehaviour
 {
     public event Action<int> ItemMouseDown = delegate { };
 
-    [SerializeField]
-    private GameObject _scrollItemPrefab;
-    [SerializeField]
-    private GameObject _scrollContent;
-    [SerializeField]
-    private List<EquipmentSlotView> _slotViews;
-    [SerializeField]
-    private Collider2D _collider;
+    private const int ExtraCellsCount = 3;
+
+    [SerializeField] private GameObject _scrollItemPrefab;
+    [SerializeField] private GameObject _scrollContent;
+    [SerializeField] private List<EquipmentSlotView> _slotViews;
+    [SerializeField] private Collider2D _collider;
     public Collider2D Collider => _collider;
 
     private readonly List<Action> _disposeActions = new List<Action>();
@@ -29,6 +27,11 @@ public class EquipmentScrollView : MonoBehaviour
 
     public void SetupItem(int index, EquipmentType equipmentType, Sprite iconSprite)
     {
+        while (index >= _slotViews.Count)
+        {
+            CreateExtraCells(ExtraCellsCount);
+        }
+
         _slotViews[index].SetSlotType(ToSlotType(equipmentType));
         _slotViews[index].SetSpriteIcon(iconSprite);
 
@@ -44,6 +47,19 @@ public class EquipmentScrollView : MonoBehaviour
     public void SetItemVisibility(int itemIdex, bool visibility)
     {
         _slotViews[itemIdex].IconVisibility = visibility;
+    }
+
+    private void CreateExtraCells(int extraCellsCount)
+    {
+        var initialSlotViewsCount = _slotViews.Count;
+        for (var i = initialSlotViewsCount; i < initialSlotViewsCount + extraCellsCount; i++)
+        {
+            var slotView = Instantiate(_scrollItemPrefab, _scrollContent.transform).GetComponent<EquipmentSlotView>();
+            _slotViews.Add(slotView);
+
+            var disposeAction = AddSlotListeners(i, _slotViews[i]);
+            _disposeActions.Add(disposeAction);
+        }
     }
 
     private void OnDisable()

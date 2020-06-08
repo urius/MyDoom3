@@ -11,7 +11,7 @@ public class HangarScreenMediator : MonoBehaviour
     private MenuEventsAggregator _menuEventsAggregator;
 
     private FlyingEquipmentView _flyingEquipmentView;
-    private EquipmentBase _flyingEquipmentData;
+    private EquipmentConfigBase _flyingEquipmentData;
     private Camera _mainCamera;
     private float _screenZ;
 
@@ -34,7 +34,7 @@ public class HangarScreenMediator : MonoBehaviour
         _menuEventsAggregator.EquipmentSlotMouseDown -= OnEquipmentSlotMouseDown;
     }
 
-    private void OnEquipmentSlotMouseDown(EquipmentBase equipment)
+    private void OnEquipmentSlotMouseDown(EquipmentConfigBase equipment)
     {
         if (equipment != null && _flyingEquipmentView == null)
         {
@@ -46,18 +46,29 @@ public class HangarScreenMediator : MonoBehaviour
 
     void Update()
     {
+        var isMouseReleased = Input.GetMouseButtonUp(0);
         if (_flyingEquipmentView != null)
         {
             var point = _mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _screenZ));
             _flyingEquipmentView.transform.position = point;
-            if (Input.GetMouseButtonUp(0))
-            {
-                Destroy(_flyingEquipmentView.gameObject);
-                _flyingEquipmentView = null;
 
-                _menuEventsAggregator.FlyingEquipmentMouseUp(_flyingEquipmentData, point);
-                _flyingEquipmentData = null;
+            if (isMouseReleased)
+            {
+                if (_flyingEquipmentView != null)
+                {
+
+                    Destroy(_flyingEquipmentView.gameObject);
+                    _flyingEquipmentView = null;
+
+                    _menuEventsAggregator.FlyingEquipmentMouseUp(_flyingEquipmentData, point);
+                    _flyingEquipmentData = null;
+                }
             }
+        }
+
+        if (isMouseReleased)
+        {
+            _menuEventsAggregator.MouseUp();
         }
     }
 }

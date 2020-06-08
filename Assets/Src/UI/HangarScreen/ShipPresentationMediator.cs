@@ -37,11 +37,12 @@ public class ShipPresentationMediator : MonoBehaviour
 
     private void OnEnable()
     {
+        _menuEventsAggregator.EquipmentSlotMouseDown += OnEquipmentSlotMouseDown;
         _menuEventsAggregator.FlyingEquipmentMouseUp += OnFlyingEquipmentMouseUp;
+
         _playerDataModel.ShipData.EquipmentSet += OnEquipmentSet;
         _playerDataModel.ShipData.EquipmentRemoved += OnEquipmentRemoved;
     }
-
 
     private void Start()
     {
@@ -73,12 +74,31 @@ public class ShipPresentationMediator : MonoBehaviour
 
     private void OnDisable()
     {
+        _menuEventsAggregator.EquipmentSlotMouseDown -= OnEquipmentSlotMouseDown;
         _menuEventsAggregator.FlyingEquipmentMouseUp -= OnFlyingEquipmentMouseUp;
+        _menuEventsAggregator.MouseUp -= OnMouseUp;
+
         _playerDataModel.ShipData.EquipmentSet -= OnEquipmentSet;
         _playerDataModel.ShipData.EquipmentRemoved -= OnEquipmentRemoved;
     }
 
-    private void OnFlyingEquipmentMouseUp(EquipmentBase equipment, Vector3 position)
+    private void OnEquipmentSlotMouseDown(EquipmentConfigBase equipment)
+    {
+        _slotsByType[equipment.EquipmentType].ForEach(s => s.AnimateScaleTo(1.4f));
+
+        _menuEventsAggregator.MouseUp += OnMouseUp;
+    }
+
+    private void OnMouseUp()
+    {
+        _menuEventsAggregator.MouseUp -= OnMouseUp;
+        foreach (var kvp in _slotsByType)
+        {
+            kvp.Value.ForEach(s => s.AnimateScaleTo(1f));
+        }
+    }
+
+    private void OnFlyingEquipmentMouseUp(EquipmentConfigBase equipment, Vector3 position)
     {
         var slots = _slotsByType[equipment.EquipmentType];
         var pos2d = new Vector2(position.x, position.y);
@@ -103,25 +123,30 @@ public class ShipPresentationMediator : MonoBehaviour
     private void OnSlotMouseDown(EquipmentType slotType, int index)
     {
         _slotsByType[slotType][index].IconVisibility = false;
-        _menuEventsAggregator.EquipmentSlotMouseDown(_playerDataModel.ShipData.GetEquipment(slotType, index));
+
+        var equipment = _playerDataModel.ShipData.GetEquipment(slotType, index);
+        if (equipment != null)
+        {
+            _menuEventsAggregator.EquipmentSlotMouseDown(equipment);
+        }
     }
 
-    private void OnEquipmentSet(int slotIndex, EquipmentBase equipment)
+    private void OnEquipmentSet(int slotIndex, EquipmentConfigBase equipment)
     {
         ShowEquipmentItem(slotIndex, equipment);
     }
 
-    private void ShowEquipmentItem(int slotIndex, EquipmentBase equipment)
+    private void ShowEquipmentItem(int slotIndex, EquipmentConfigBase equipment)
     {
         _slotsByType[equipment.EquipmentType][slotIndex].SetSpriteIcon(equipment.IconSprite);
     }
 
-    private void OnEquipmentRemoved(int slotIndex, EquipmentBase equipment)
+    private void OnEquipmentRemoved(int slotIndex, EquipmentConfigBase equipment)
     {
         _slotsByType[equipment.EquipmentType][slotIndex].SetSpriteIcon(null);
     }
 
-    private void CreateSlotsOnShip(EquipmentType slotType, Transform[] slotOrigimalTransforms, GameObject slotPrefab)
+    private void CreateSlotsOnShip(EquipmentType equipmentType, Transform[] slotOrigimalTransforms, GameObject slotPrefab)
     {
         foreach (var originalTransform in slotOrigimalTransforms)
         {
@@ -129,18 +154,34 @@ public class ShipPresentationMediator : MonoBehaviour
             var viewportPos = _shipRenderCamera.WorldToViewportPoint(originalTransform.position);
             var positionOnImage = new Vector2(_rectTransform.rect.width * viewportPos.x, _rectTransform.rect.height * viewportPos.y);
             slotIcon.transform.localPosition = new Vector3(positionOnImage.x, positionOnImage.y);
-            var slotIndex = _slotsByType[slotType].Count;
+            var slotIndex = _slotsByType[equipmentType].Count;
             var equipmentSlotView = slotIcon.GetComponent<EquipmentSlotView>();
             if (equipmentSlotView == null)
             {
                 throw new InvalidOperationException($"[ShipPresentationMediator::CreateSlotsOnShip] : prefab {slotPrefab.name} has no {nameof(EquipmentSlotView)}");
             }
-            _slotsByType[slotType].Add(equipmentSlotView);
+            equipmentSlotView.SetSlotType(ToSlotType(equipmentType));
+            _slotsByType[equipmentType].Add(equipmentSlotView);
 
             equipmentSlotView.OnMouseDown += () =>
             {
-                OnSlotMouseDown(slotType, slotIndex);
+                OnSlotMouseDown(equipmentType, slotIndex);
             };
+        }
+    }
+
+    private EquipmentSlotType ToSlotType(EquipmentType equipmentType)
+    {
+        switch (equipmentType)
+        {
+            case EquipmentType.Engine:
+                return EquipmentSlotType.Engine;
+            case EquipmentType.Shield:
+                return EquipmentSlotType.Shield;
+            case EquipmentType.Weapon:
+                return EquipmentSlotType.Weapon;
+            default:
+                return EquipmentSlotType.Default;
         }
     }
 }

@@ -11,14 +11,15 @@ public class MenuEventsAggregator
     public Action<GameObject> InventoryClicked = delegate { };
 
     //Equipment shop
-    public Action<EquipmentBase> BuyEquipmentClicked = delegate { };
+    public Action<EquipmentConfigBase> BuyEquipmentClicked = delegate { };
 
     //Ship shop
     public Action<ShipConfig> BuyShipClicked = delegate { };
 
     //Hangar screen
-    public Action<EquipmentBase> EquipmentSlotMouseDown = delegate { };
-    public Action<EquipmentBase, Vector3> FlyingEquipmentMouseUp = delegate { };
-    public Action<int, EquipmentBase> FlyingEquipmentDropOverShip = delegate { };
-    public Action<EquipmentBase> FlyingEquipmentDropOverInventory = delegate { };    
+    public Action<EquipmentConfigBase> EquipmentSlotMouseDown = delegate { };
+    public Action<EquipmentConfigBase, Vector3> FlyingEquipmentMouseUp = delegate { };
+    public Action MouseUp = delegate { };
+    public Action<int, EquipmentConfigBase> FlyingEquipmentDropOverShip = delegate { };
+    public Action<EquipmentConfigBase> FlyingEquipmentDropOverInventory = delegate { };    
 }

@@ -40,12 +40,12 @@ public class EquipmentScrollViewMediator : MonoBehaviour
         _playerDataModel.InventoryEquipmentRemoved -= OnInventoryEquipmentRemoved;
         _playerDataModel.InventoryEquipmentSet -= OnInventoryEquipmentSet;
     }
-    private void OnInventoryEquipmentSet(int inventoryindex, EquipmentBase equipment)
+    private void OnInventoryEquipmentSet(int inventoryindex, EquipmentConfigBase equipment)
     {
         _equipmentScrollView.SetupItem(inventoryindex, equipment.EquipmentType, equipment.IconSprite);
     }
 
-    private void OnInventoryEquipmentRemoved(EquipmentBase equipment)
+    private void OnInventoryEquipmentRemoved(EquipmentConfigBase equipment)
     {
         _equipmentScrollView.ResetView(_playerDataModel.InventoryEqipments.Count);
         SetupItems(_playerDataModel.InventoryEqipments);
@@ -59,7 +59,7 @@ public class EquipmentScrollViewMediator : MonoBehaviour
             _equipmentScrollView.SetItemVisibility(itemIndex, false);
         }
     }
-    private void OnEquipmentMouseUp(EquipmentBase equipment, Vector3 point)
+    private void OnEquipmentMouseUp(EquipmentConfigBase equipment, Vector3 point)
     {
         if (_equipmentScrollView.Collider.OverlapPoint(new Vector2(point.x, point.y)))
         {
@@ -72,7 +72,7 @@ public class EquipmentScrollViewMediator : MonoBehaviour
         }
     }
 
-    private void SetupItems(IEnumerable<EquipmentBase> equipments)
+    private void SetupItems(IEnumerable<EquipmentConfigBase> equipments)
     {
         var i = 0;
         foreach (var equipment in equipments)

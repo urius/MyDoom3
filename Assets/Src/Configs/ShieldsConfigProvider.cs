@@ -29,7 +29,7 @@ public enum ShieldId
 }
 
 [Serializable]
-public class ShieldConfig : EquipmentBase
+public class ShieldConfig : EquipmentConfigBase
 {
     public ShieldId ShieldId;
     public int ChargingSpeed;

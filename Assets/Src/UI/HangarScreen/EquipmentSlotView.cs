@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.UI.Button;
 
 public enum EquipmentSlotType
 {
@@ -21,19 +21,13 @@ public class EquipmentSlotView : MonoBehaviour
     private Image _bgImage;
     [SerializeField]
     private Collider2D _itemCollider;
-
-
     [SerializeField]
     private ColorBySlotType[] _colours;
 
-    [SerializeField]
-    private Color _defaultTypeColor;
-    [SerializeField]
-    private Color _weaponTypeColor;
-    [SerializeField]
-    private Color _engineTypeColor;
-    [SerializeField]
-    private Color _shieldTypeColor;
+    private RectTransform _rectTransform;
+
+    private float _targetScale = 1;
+    private Coroutine _scaleCoroutine;
 
     public Action OnMouseDown = delegate { };
     public Collider2D ItemCollider => _itemCollider;
@@ -41,6 +35,11 @@ public class EquipmentSlotView : MonoBehaviour
     {
         get => _equipmentIconImage.enabled;
         set { _equipmentIconImage.enabled = value; }
+    }
+
+    public void Awake()
+    {
+        _rectTransform = GetComponent<RectTransform>();
     }
 
     public void SetSlotType(EquipmentSlotType type)
@@ -53,6 +52,27 @@ public class EquipmentSlotView : MonoBehaviour
     {
         _equipmentIconImage.sprite = iconSprite;
         IconVisibility = (iconSprite != null);
+    }
+
+    public void AnimateScaleTo(float targetScaleValue = 1)
+    {
+        if (_scaleCoroutine != null)
+        {
+            StopCoroutine(_scaleCoroutine);
+            _scaleCoroutine = null;
+        }
+
+        _targetScale = targetScaleValue;
+        StartCoroutine(ScaleCoroutine());
+    }
+
+    private IEnumerator ScaleCoroutine()
+    {
+        while (Math.Abs(_targetScale - _rectTransform.localScale.x) > 0.01)
+        {
+            _rectTransform.localScale = Vector3.Lerp(_rectTransform.localScale, new Vector3(_targetScale, _targetScale, 1), 0.25f);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
     }
 
     protected void OnPointerDown()

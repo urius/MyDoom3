@@ -28,7 +28,7 @@ public class HangarScreenController : IInitializable, IDisposable
         _menuEventsAggregator.FlyingEquipmentDropOverInventory -= OnDropOverInventory;
     }
 
-    private void OnDropOverShip(int slotIndex, EquipmentBase newEquipment)
+    private void OnDropOverShip(int slotIndex, EquipmentConfigBase newEquipment)
     {
         if (_playerDataModel.ShipData.IsEquipped(newEquipment))
         {
@@ -59,7 +59,7 @@ public class HangarScreenController : IInitializable, IDisposable
         _playerDataModel.ShipData.SetupEquipment(slotIndex, newEquipment);
     }
 
-    private void OnDropOverInventory(EquipmentBase equipment)
+    private void OnDropOverInventory(EquipmentConfigBase equipment)
     {
         if (_playerDataModel.ShipData.IsEquipped(equipment))
         {
