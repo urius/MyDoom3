@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using DigitalRuby.Tween;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EquipmentScrollView : MonoBehaviour
 {
     public event Action<int> ItemMouseDown = delegate { };
 
-    private const int ExtraCellsCount = 3;
+    private const int ExtraCellsCount = 2;
+    private const string ScollTweenKey = "ScrollTween";
 
     [SerializeField] private GameObject _scrollItemPrefab;
     [SerializeField] private GameObject _scrollContent;
     [SerializeField] private List<EquipmentSlotView> _slotViews;
     [SerializeField] private Collider2D _collider;
     public Collider2D Collider => _collider;
+    [SerializeField] private Button _buttonLeft;
+    [SerializeField] private Button _buttonRight;
+    [SerializeField] private RectTransform _viewportRect;
+    [SerializeField] private GridLayoutGroup _gridLayoutGroup;
+    [SerializeField] private ScrollRect _scrollRect;
 
+    private RectTransform _scrollContentRectTransform;
+    private Vector2Tween _currentTween;
     private readonly List<Action> _disposeActions = new List<Action>();
-
-    private void OnEnable()
-    {
-        for (var i = 0; i < _slotViews.Count; i++)
-        {
-            var disposeAction = AddSlotListeners(i, _slotViews[i]);
-            _disposeActions.Add(disposeAction);
-        }
-    }
 
     public void SetupItem(int index, EquipmentType equipmentType, Sprite iconSprite)
     {
@@ -62,8 +63,62 @@ public class EquipmentScrollView : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        _buttonLeft.onClick.AddListener(OnLeftClick);
+        _buttonRight.onClick.AddListener(OnRightClick);
+
+        _scrollContentRectTransform = _scrollContent.GetComponent<RectTransform>();
+    }
+
+    private void OnLeftClick()
+    {
+        var cellSize = _gridLayoutGroup.cellSize.x;
+
+        var newPos = _scrollContentRectTransform.anchoredPosition.x + cellSize * 0.5f;
+        newPos = Math.Min(0, (float)Math.Ceiling(newPos / cellSize) * cellSize);
+
+        ScrollToOffset(newPos);
+    }
+
+    private void OnRightClick()
+    {
+        var cellSize = _gridLayoutGroup.cellSize.x;
+        var minPos = _viewportRect.rect.width - _scrollContentRectTransform.rect.width;
+
+        var newPos = _scrollContentRectTransform.anchoredPosition.x - cellSize * 0.5f;
+        newPos = Math.Max(minPos, (float)Math.Floor(newPos / cellSize) * cellSize);
+
+        ScrollToOffset(newPos);
+    }
+
+    private void ScrollToOffset(float newPos)
+    {
+        var starsPos = _scrollContentRectTransform.anchoredPosition;
+        var targetPos = new Vector2(newPos, _scrollContentRectTransform.anchoredPosition.y);
+
+        TweenFactory.RemoveTweenKey(ScollTweenKey, TweenStopBehavior.DoNotModify);
+        _currentTween = _scrollContent.gameObject.Tween(ScollTweenKey, starsPos, targetPos, 0.5f, TweenScaleFunctions.CubicEaseOut, OnScrollContentTweenProgress);
+    }
+
+    private void OnScrollContentTweenProgress(ITween<Vector2> tween)
+    {
+        _scrollContentRectTransform.anchoredPosition = tween.CurrentValue;
+    }
+
+    private void OnEnable()
+    {
+        for (var i = 0; i < _slotViews.Count; i++)
+        {
+            var disposeAction = AddSlotListeners(i, _slotViews[i]);
+            _disposeActions.Add(disposeAction);
+        }
+    }
+
     private void OnDisable()
     {
+        TweenFactory.RemoveTweenKey(ScollTweenKey, TweenStopBehavior.DoNotModify);
+
         _disposeActions.ForEach(a => a());
         _disposeActions.Clear();
     }
