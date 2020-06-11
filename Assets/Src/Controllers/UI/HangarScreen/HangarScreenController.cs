@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 using Zenject;
 
 public class HangarScreenController : IInitializable, IDisposable
@@ -28,7 +27,7 @@ public class HangarScreenController : IInitializable, IDisposable
         _menuEventsAggregator.FlyingEquipmentDropOverInventory -= OnDropOverInventory;
     }
 
-    private void OnDropOverShip(int slotIndex, EquipmentConfigBase newEquipment)
+    private void OnDropOverShip(int slotIndex, EquipmentData newEquipment)
     {
         if (_playerDataModel.ShipData.IsEquipped(newEquipment))
         {
@@ -59,7 +58,7 @@ public class HangarScreenController : IInitializable, IDisposable
         _playerDataModel.ShipData.SetupEquipment(slotIndex, newEquipment);
     }
 
-    private void OnDropOverInventory(EquipmentConfigBase equipment)
+    private void OnDropOverInventory(EquipmentData equipment)
     {
         if (_playerDataModel.ShipData.IsEquipped(equipment))
         {

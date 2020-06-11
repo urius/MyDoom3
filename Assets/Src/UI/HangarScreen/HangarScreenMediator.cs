@@ -11,7 +11,7 @@ public class HangarScreenMediator : MonoBehaviour
     private MenuEventsAggregator _menuEventsAggregator;
 
     private FlyingEquipmentView _flyingEquipmentView;
-    private EquipmentConfigBase _flyingEquipmentData;
+    private EquipmentData _flyingEquipmentData;
     private Camera _mainCamera;
     private float _screenZ;
 
@@ -34,7 +34,7 @@ public class HangarScreenMediator : MonoBehaviour
         _menuEventsAggregator.EquipmentSlotMouseDown -= OnEquipmentSlotMouseDown;
     }
 
-    private void OnEquipmentSlotMouseDown(EquipmentConfigBase equipment)
+    private void OnEquipmentSlotMouseDown(EquipmentData equipment)
     {
         if (equipment != null && _flyingEquipmentView == null)
         {

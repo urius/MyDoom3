@@ -17,9 +17,9 @@ public class MenuEventsAggregator
     public Action<ShipConfig> BuyShipClicked = delegate { };
 
     //Hangar screen
-    public Action<EquipmentConfigBase> EquipmentSlotMouseDown = delegate { };
-    public Action<EquipmentConfigBase, Vector3> FlyingEquipmentMouseUp = delegate { };
+    public Action<EquipmentData> EquipmentSlotMouseDown = delegate { };
+    public Action<EquipmentData, Vector3> FlyingEquipmentMouseUp = delegate { };
     public Action MouseUp = delegate { };
-    public Action<int, EquipmentConfigBase> FlyingEquipmentDropOverShip = delegate { };
-    public Action<EquipmentConfigBase> FlyingEquipmentDropOverInventory = delegate { };    
+    public Action<int, EquipmentData> FlyingEquipmentDropOverShip = delegate { };
+    public Action<EquipmentData> FlyingEquipmentDropOverInventory = delegate { };    
 }

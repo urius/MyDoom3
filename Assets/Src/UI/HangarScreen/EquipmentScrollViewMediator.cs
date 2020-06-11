@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -40,12 +39,12 @@ public class EquipmentScrollViewMediator : MonoBehaviour
         _playerDataModel.InventoryEquipmentRemoved -= OnInventoryEquipmentRemoved;
         _playerDataModel.InventoryEquipmentSet -= OnInventoryEquipmentSet;
     }
-    private void OnInventoryEquipmentSet(int inventoryindex, EquipmentConfigBase equipment)
+    private void OnInventoryEquipmentSet(int inventoryindex, EquipmentData equipment)
     {
         _equipmentScrollView.SetupItem(inventoryindex, equipment.EquipmentType, equipment.IconSprite);
     }
 
-    private void OnInventoryEquipmentRemoved(EquipmentConfigBase equipment)
+    private void OnInventoryEquipmentRemoved(EquipmentData equipment)
     {
         _equipmentScrollView.ResetView(_playerDataModel.InventoryEqipments.Count);
         SetupItems(_playerDataModel.InventoryEqipments);
@@ -59,7 +58,7 @@ public class EquipmentScrollViewMediator : MonoBehaviour
             _equipmentScrollView.SetItemVisibility(itemIndex, false);
         }
     }
-    private void OnEquipmentMouseUp(EquipmentConfigBase equipment, Vector3 point)
+    private void OnEquipmentMouseUp(EquipmentData equipment, Vector3 point)
     {
         if (_equipmentScrollView.Collider.OverlapPoint(new Vector2(point.x, point.y)))
         {
@@ -72,7 +71,7 @@ public class EquipmentScrollViewMediator : MonoBehaviour
         }
     }
 
-    private void SetupItems(IEnumerable<EquipmentConfigBase> equipments)
+    private void SetupItems(IEnumerable<EquipmentData> equipments)
     {
         var i = 0;
         foreach (var equipment in equipments)

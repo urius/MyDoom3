@@ -4,64 +4,64 @@ using System.Linq;
 
 public class ShipData
 {
-    public event Action<int, EquipmentConfigBase> EquipmentSet = delegate { };
-    public event Action<int, EquipmentConfigBase> EquipmentRemoved = delegate { };
+    public event Action<int, EquipmentData> EquipmentSet = delegate { };
+    public event Action<int, EquipmentData> EquipmentRemoved = delegate { };
 
-    private readonly WeaponConfig[] _weaponsConfig;
+    private readonly WeaponData[] _weaponsData;
 
     public readonly ShipConfig ShipConfig;
 
-    public ShipData(ShipConfig config, WeaponConfig[] weaponsConfig)
+    public ShipData(ShipConfig config, WeaponData[] weaponsData)
     {
         ShipConfig = config;
-        _weaponsConfig = weaponsConfig;
+        _weaponsData = weaponsData;
     }
 
-    public ShipData(ShipConfig config, WeaponConfig[] weaponsConfig, EngineConfig engineConfig, ShieldConfig shieldConfig)
-        :this(config, weaponsConfig)
+    public ShipData(ShipConfig config, WeaponData[] weaponsData, EngineData engineData, ShieldData shieldData)
+        :this(config, weaponsData)
     {
-        EngineConfig = engineConfig;
-        ShieldConfig = shieldConfig;
+        EngineData = engineData;
+        ShieldData = shieldData;
     }
 
-    public IReadOnlyList<WeaponConfig> WeaponsConfig => _weaponsConfig;
-    public ShieldConfig ShieldConfig { get; private set; }
-    public EngineConfig EngineConfig { get; private set; }
+    public IReadOnlyList<WeaponData> WeaponsData => _weaponsData;
+    public ShieldData ShieldData { get; private set; }
+    public EngineData EngineData { get; private set; }
 
-    public void SetupEquipment(int slotIndex, EquipmentConfigBase equipment)
+    public void SetupEquipment(int slotIndex, EquipmentData equipment)
     {
         switch (equipment.EquipmentType)
         {
             case EquipmentType.Weapon:
-                _weaponsConfig[slotIndex] = (WeaponConfig)equipment;
+                _weaponsData[slotIndex] = (WeaponData)equipment;
                 break;
             case EquipmentType.Shield:
-                ShieldConfig = (ShieldConfig)equipment;
+                ShieldData = (ShieldData)equipment;
                 break;
             case EquipmentType.Engine:
-                EngineConfig = (EngineConfig)equipment;
+                EngineData = (EngineData)equipment;
                 break;
         }
         EquipmentSet(slotIndex, equipment);
     }
 
-    public EquipmentConfigBase GetEquipment(EquipmentType type, int index)
+    public EquipmentData GetEquipment(EquipmentType type, int index)
     {
         return GetEquipmentsByType(type)[index];
     }
 
-    public bool IsEquipped(EquipmentConfigBase equipment)
+    public bool IsEquipped(EquipmentData equipment)
     {
         return GetEquipmentsByType(equipment.EquipmentType).Any(e => e == equipment);
     }
 
-    public int GetEquipmentSlotIndex(EquipmentConfigBase equipment)
+    public int GetEquipmentSlotIndex(EquipmentData equipment)
     {
         var equpmentsArray = GetEquipmentsByType(equipment.EquipmentType);
         return Array.IndexOf(equpmentsArray, equipment);
     }
 
-    public bool RemoveEquipment(EquipmentConfigBase equipment)
+    public bool RemoveEquipment(EquipmentData equipment)
     {
         var index = GetEquipmentSlotIndex(equipment);
 
@@ -70,13 +70,13 @@ public class ShipData
             switch (equipment.EquipmentType)
             {
                 case EquipmentType.Weapon:
-                    _weaponsConfig[index] = null;
+                    _weaponsData[index] = null;
                     break;
                 case EquipmentType.Shield:
-                    ShieldConfig = null;
+                    ShieldData = null;
                     break;
                 case EquipmentType.Engine:
-                    EngineConfig = null;
+                    EngineData = null;
                     break;
             }
 
@@ -91,23 +91,23 @@ public class ShipData
     {
         return new ShipDataMin(
             ShipConfig.ShipType,
-            _weaponsConfig.Select(w => w.WeaponId).ToArray(),
-            ShieldConfig.ShieldId,
-            EngineConfig.EngineId);
+            _weaponsData.Select(w => w.WeaponId).ToArray(),
+            ShieldData.ShieldId,
+            EngineData.EngineId);
     }
 
-    private EquipmentConfigBase[] GetEquipmentsByType(EquipmentType type)
+    private EquipmentData[] GetEquipmentsByType(EquipmentType type)
     {
         switch (type)
         {
             case EquipmentType.Weapon:
-                return _weaponsConfig;
+                return _weaponsData;
             case EquipmentType.Shield:
-                return new EquipmentConfigBase[] { ShieldConfig };
+                return new EquipmentData[] { ShieldData };
             case EquipmentType.Engine:
-                return new EquipmentConfigBase[] { EngineConfig };
+                return new EquipmentData[] { EngineData };
         }
 
-        return new EquipmentConfigBase[0];
+        return new EquipmentData[0];
     }
 }

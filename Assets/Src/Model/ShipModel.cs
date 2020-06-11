@@ -37,8 +37,13 @@ public class ShipModel
 
         HP = shipStaticData.ShipConfig.HP;
 
-        _installedWeaponConfigs = shipStaticData.WeaponsConfig.Select((c, i) => (c, i)).Where(pair => pair.c != null).ToArray();
-        _cooldownStartValues = _installedWeaponConfigs.Select(p => p.config.CooldownFrames).ToArray();
+        _installedWeaponConfigs = shipStaticData.WeaponsData
+            .Select((c, i) => (config: c.Config, index: i))
+            .Where(pair => pair.config != null)
+            .ToArray();
+        _cooldownStartValues = _installedWeaponConfigs
+            .Select(p => p.config.CooldownFrames)
+            .ToArray();
         _cooldowns = (int[])_cooldownStartValues.Clone();
     }
 

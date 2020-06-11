@@ -8,8 +8,8 @@ public class PlayerDataModel
 {
     private const string SaveFileName = "pd.sv";
 
-    public event Action<EquipmentConfigBase> InventoryEquipmentRemoved = delegate { };
-    public event Action<int, EquipmentConfigBase> InventoryEquipmentSet = delegate { };
+    public event Action<EquipmentData> InventoryEquipmentRemoved = delegate { };
+    public event Action<int, EquipmentData> InventoryEquipmentSet = delegate { };
     public event Action RequestSave = delegate { };
 
     private readonly TaskCompletionSource<bool> _dataLoadedTsc = new TaskCompletionSource<bool>();
@@ -18,7 +18,7 @@ public class PlayerDataModel
     public int Exp;
     public ShipData ShipData;
 
-    private List<EquipmentConfigBase> _inventoryEqipments = new List<EquipmentConfigBase>();
+    private List<EquipmentData> _inventoryEqipments = new List<EquipmentData>();
     private readonly ModelsFactory _modelsFactory;
     private readonly DefaultPlayerDataProvider _defaultPlayerDataProvider;
 
@@ -32,24 +32,24 @@ public class PlayerDataModel
     }
 
     public ShipConfig ShipConfig => ShipData.ShipConfig;
-    public IReadOnlyList<EquipmentConfigBase> InventoryEqipments => _inventoryEqipments;
+    public IReadOnlyList<EquipmentData> InventoryEqipments => _inventoryEqipments;
     public Task DataLoadedTask => _dataLoadedTsc.Task;
 
-    public void AddInventoryEquipment(EquipmentConfigBase equipment)
+    public void AddInventoryEquipment(EquipmentData equipment)
     {
         _inventoryEqipments.Add(equipment);
 
         InventoryEquipmentSet(_inventoryEqipments.Count - 1, equipment);
     }
 
-    public void RemoveInventoryEquipment(EquipmentConfigBase equipment)
+    public void RemoveInventoryEquipment(EquipmentData equipment)
     {
         _inventoryEqipments.Remove(equipment);
 
         InventoryEquipmentRemoved(equipment);
     }
 
-    public void SwapInventoryEquipment(EquipmentConfigBase equipmentInInventoryToRemove, EquipmentConfigBase newEquipment)
+    public void SwapInventoryEquipment(EquipmentData equipmentInInventoryToRemove, EquipmentData newEquipment)
     {
         var index = _inventoryEqipments.IndexOf(equipmentInInventoryToRemove);
         _inventoryEqipments[index] = newEquipment;
@@ -57,7 +57,7 @@ public class PlayerDataModel
         InventoryEquipmentSet(index, newEquipment);
     }
 
-    public bool HaveEquipmentInInventory(EquipmentConfigBase equipment)
+    public bool HaveEquipmentInInventory(EquipmentData equipment)
     {
         return _inventoryEqipments.IndexOf(equipment) > -1;
     }

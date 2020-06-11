@@ -82,7 +82,7 @@ public class ShipPresentationMediator : MonoBehaviour
         _playerDataModel.ShipData.EquipmentRemoved -= OnEquipmentRemoved;
     }
 
-    private void OnEquipmentSlotMouseDown(EquipmentConfigBase equipment)
+    private void OnEquipmentSlotMouseDown(EquipmentData equipment)
     {
         _slotsByType[equipment.EquipmentType].ForEach(s => s.AnimateScaleTo(1.4f));
 
@@ -98,7 +98,7 @@ public class ShipPresentationMediator : MonoBehaviour
         }
     }
 
-    private void OnFlyingEquipmentMouseUp(EquipmentConfigBase equipment, Vector3 position)
+    private void OnFlyingEquipmentMouseUp(EquipmentData equipment, Vector3 position)
     {
         var slots = _slotsByType[equipment.EquipmentType];
         var pos2d = new Vector2(position.x, position.y);
@@ -131,17 +131,17 @@ public class ShipPresentationMediator : MonoBehaviour
         }
     }
 
-    private void OnEquipmentSet(int slotIndex, EquipmentConfigBase equipment)
+    private void OnEquipmentSet(int slotIndex, EquipmentData equipment)
     {
         ShowEquipmentItem(slotIndex, equipment);
     }
 
-    private void ShowEquipmentItem(int slotIndex, EquipmentConfigBase equipment)
+    private void ShowEquipmentItem(int slotIndex, EquipmentData equipment)
     {
         _slotsByType[equipment.EquipmentType][slotIndex].SetSpriteIcon(equipment.IconSprite);
     }
 
-    private void OnEquipmentRemoved(int slotIndex, EquipmentConfigBase equipment)
+    private void OnEquipmentRemoved(int slotIndex, EquipmentData equipment)
     {
         _slotsByType[equipment.EquipmentType][slotIndex].SetSpriteIcon(null);
     }

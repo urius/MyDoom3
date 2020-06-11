@@ -23,7 +23,6 @@ public class EquipmentScrollView : MonoBehaviour
     [SerializeField] private ScrollRect _scrollRect;
 
     private RectTransform _scrollContentRectTransform;
-    private Vector2Tween _currentTween;
     private readonly List<Action> _disposeActions = new List<Action>();
 
     public void SetupItem(int index, EquipmentType equipmentType, Sprite iconSprite)
@@ -98,7 +97,7 @@ public class EquipmentScrollView : MonoBehaviour
         var targetPos = new Vector2(newPos, _scrollContentRectTransform.anchoredPosition.y);
 
         TweenFactory.RemoveTweenKey(ScollTweenKey, TweenStopBehavior.DoNotModify);
-        _currentTween = _scrollContent.gameObject.Tween(ScollTweenKey, starsPos, targetPos, 0.5f, TweenScaleFunctions.CubicEaseOut, OnScrollContentTweenProgress);
+        _scrollContent.gameObject.Tween(ScollTweenKey, starsPos, targetPos, 0.5f, TweenScaleFunctions.CubicEaseOut, OnScrollContentTweenProgress);
     }
 
     private void OnScrollContentTweenProgress(ITween<Vector2> tween)
