@@ -16,6 +16,7 @@ public class PlayerDataModel
 
     public int Money;
     public int Exp;
+    public float SellMultiplier = 0.5f;
     public ShipData ShipData;
 
     private List<EquipmentData> _inventoryEqipments = new List<EquipmentData>();

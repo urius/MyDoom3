@@ -54,15 +54,11 @@ public class HangarScreenMediator : MonoBehaviour
 
             if (isMouseReleased)
             {
-                if (_flyingEquipmentView != null)
-                {
+                Destroy(_flyingEquipmentView.gameObject);
+                _flyingEquipmentView = null;
 
-                    Destroy(_flyingEquipmentView.gameObject);
-                    _flyingEquipmentView = null;
-
-                    _menuEventsAggregator.FlyingEquipmentMouseUp(_flyingEquipmentData, point);
-                    _flyingEquipmentData = null;
-                }
+                _menuEventsAggregator.FlyingEquipmentMouseUp(_flyingEquipmentData, point);
+                _flyingEquipmentData = null;
             }
         }
 

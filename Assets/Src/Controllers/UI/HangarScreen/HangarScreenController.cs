@@ -19,12 +19,14 @@ public class HangarScreenController : IInitializable, IDisposable
     {
         _menuEventsAggregator.FlyingEquipmentDropOverShip += OnDropOverShip;
         _menuEventsAggregator.FlyingEquipmentDropOverInventory += OnDropOverInventory;
+        _menuEventsAggregator.RequestSellEqipment += OnRequestSellEquipment;
     }
 
     public void Dispose()
     {
         _menuEventsAggregator.FlyingEquipmentDropOverShip -= OnDropOverShip;
         _menuEventsAggregator.FlyingEquipmentDropOverInventory -= OnDropOverInventory;
+        _menuEventsAggregator.RequestSellEqipment -= OnRequestSellEquipment;
     }
 
     private void OnDropOverShip(int slotIndex, EquipmentData newEquipment)
@@ -69,5 +71,19 @@ public class HangarScreenController : IInitializable, IDisposable
         {
             _playerDataModel.AddInventoryEquipment(equipment);
         }
+    }
+
+    private void OnRequestSellEquipment(EquipmentData equipment)
+    {
+        if (_playerDataModel.ShipData.IsEquipped(equipment))
+        {
+            _playerDataModel.ShipData.RemoveEquipment(equipment);
+        }
+        else
+        {
+            _playerDataModel.RemoveInventoryEquipment(equipment);
+        }
+
+        _playerDataModel.Money += (int)(equipment.Config.Cost * _playerDataModel.SellMultiplier);
     }
 }

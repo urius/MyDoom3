@@ -19,6 +19,7 @@ public class MenuEventsAggregator
     //Hangar screen
     public Action<EquipmentData> EquipmentSlotMouseDown = delegate { };
     public Action<EquipmentData, Vector3> FlyingEquipmentMouseUp = delegate { };
+    public Action<EquipmentData> RequestSellEqipment = delegate { };    
     public Action MouseUp = delegate { };
     public Action<int, EquipmentData> FlyingEquipmentDropOverShip = delegate { };
     public Action<EquipmentData> FlyingEquipmentDropOverInventory = delegate { };    
