@@ -550,6 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca83637476bb14f8cb80dd36a6956b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playButton: {fileID: 8058333646230640614}
   _inventoryButton: {fileID: 8058333645935536215}
   _shipsButton: {fileID: 8058333647799923111}
   _equipmentButton: {fileID: 8058333647548425208}

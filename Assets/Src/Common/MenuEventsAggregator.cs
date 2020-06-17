@@ -5,6 +5,7 @@ public class MenuEventsAggregator
 {
     //main navigation
     
+    public Action<GameObject> PlayClicked = delegate { };
     public Action<GameObject> HomeClicked = delegate { };
     public Action<GameObject> ShipsClicked = delegate { };
     public Action<GameObject> EquipmentShopClicked = delegate { };
@@ -22,5 +23,8 @@ public class MenuEventsAggregator
     public Action<EquipmentData> RequestSellEqipment = delegate { };    
     public Action MouseUp = delegate { };
     public Action<int, EquipmentData> FlyingEquipmentDropOverShip = delegate { };
-    public Action<EquipmentData> FlyingEquipmentDropOverInventory = delegate { };    
+    public Action<EquipmentData> FlyingEquipmentDropOverInventory = delegate { };
+
+    //Select Level screen
+    public Action<int> OnStartLevelClicked = delegate { };
 }

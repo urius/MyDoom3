@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SelectLevelScreenAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: d101bf1a2fd584644b894b29b300e0f6, type: 3}
+    totalSpriteSurfaceArea: 275208
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 489d3682344c24577a5731ac86907f66, type: 3}
+  - {fileID: 21300000, guid: 00c4d953ed9b644d8997a4b555515971, type: 3}
+  - {fileID: 21300000, guid: 80036295dd60749589e5f9f7a9e87204, type: 3}
+  - {fileID: 21300000, guid: 93fc1a76cb25243289e749d120e6406c, type: 3}
+  - {fileID: 21300000, guid: 0eabb5c6ecb1e4ec9a1f7e83f9058a81, type: 3}
+  - {fileID: 21300000, guid: 03b357b933eeb4090916222f1c52866c, type: 3}
+  - {fileID: 21300000, guid: 194c61dc5730a4176be704fd835c4b52, type: 3}
+  - {fileID: 21300000, guid: 4507323ea71c54b6bb58be5ffddc2f20, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - current_level
+  - Icon_Next3
+  - Icon_Locked
+  - textbox04
+  - uncomleted_level
+  - completed_level
+  - current_completed_level
+  - Btn_nextpage_n
+  m_Tag: SelectLevelScreenAtlas
+  m_IsVariant: 0

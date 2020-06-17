@@ -613,6 +613,8 @@ MonoBehaviour:
     type: 3}
   _inventoryScreen: {fileID: 3784523482455868116, guid: 177f81886541a4f13b0a8036f2027757,
     type: 3}
+  _selectLevelScreen: {fileID: 7457379640496640050, guid: 5ce2880ecadad4af99adcb34f8244ae8,
+    type: 3}
 --- !u!1 &2033714233
 GameObject:
   m_ObjectHideFlags: 0

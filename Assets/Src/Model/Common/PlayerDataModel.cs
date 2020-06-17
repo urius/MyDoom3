@@ -20,6 +20,9 @@ public class PlayerDataModel
     public ShipData ShipData;
 
     private List<EquipmentData> _inventoryEqipments = new List<EquipmentData>();
+
+    private List<LevelData> _levels = new List<LevelData>();
+
     private readonly ModelsFactory _modelsFactory;
     private readonly DefaultPlayerDataProvider _defaultPlayerDataProvider;
 
@@ -34,6 +37,8 @@ public class PlayerDataModel
 
     public ShipConfig ShipConfig => ShipData.ShipConfig;
     public IReadOnlyList<EquipmentData> InventoryEqipments => _inventoryEqipments;
+    public IReadOnlyList<LevelData> Levels => _levels;
+
     public Task DataLoadedTask => _dataLoadedTsc.Task;
 
     public void AddInventoryEquipment(EquipmentData equipment)
@@ -75,7 +80,7 @@ public class PlayerDataModel
             data = _defaultPlayerDataProvider.PlayerData;
         }
 
-        initFromMinData(data);
+        InitFromMinData(data);
 
         _dataLoadedTsc.TrySetResult(true);
     }
@@ -86,31 +91,40 @@ public class PlayerDataModel
             Money,
             Exp,
             ShipData.ToShipDataMin(),
-            _inventoryEqipments.Select(e => e.ToEquipmentMin()).ToArray());
+            _inventoryEqipments.Select(e => e.ToEquipmentMin()).ToArray(),
+            _levels.Select(l => l.ToMinData()).ToArray());
     }
 
-    private void initFromMinData(PlayerDataMin dataMin)
+    private void InitFromMinData(PlayerDataMin dataMin)
     {
         Money = dataMin.Money;
         Exp = dataMin.Exp;
         ShipData = _modelsFactory.CreateShipData(dataMin.ShipData);
         _inventoryEqipments = dataMin.InventoryEqipmentsMin.Select(_modelsFactory.CreateEquipment).ToList();
+        _levels = dataMin.LevelsMin.Select(_modelsFactory.CreateLevel).ToList();
     }
 }
 
 [Serializable]
 public class PlayerDataMin
 {
-    public PlayerDataMin(int money, int exp, ShipDataMin shipData, EquipmentMin[] inventoryEqipmentsMin)
+    public PlayerDataMin(
+        int money,
+        int exp,
+        ShipDataMin shipData,
+        EquipmentMin[] inventoryEqipmentsMin,
+        LevelDataMin[] levelsMin)
     {
         Money = money;
         Exp = exp;
         ShipData = shipData;
         InventoryEqipmentsMin = inventoryEqipmentsMin;
+        LevelsMin = levelsMin;
     }
 
     public int Money;
     public int Exp;
     public ShipDataMin ShipData;
     public EquipmentMin[] InventoryEqipmentsMin;
+    public LevelDataMin[] LevelsMin;
 }

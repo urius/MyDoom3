@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: LevelsConfigProvider
+  m_EditorClassIdentifier: Assembly-CSharp::LevelsConfigProvider
+  _levelConfigs:
+  - Index: 0
+    WinPrice: 0
+  - Index: 1
+    WinPrice: 0
+  - Index: 2
+    WinPrice: 0
+  - Index: 3
+    WinPrice: 0
+  - Index: 4
+    WinPrice: 0
+  - Index: 5
+    WinPrice: 0
+  - Index: 6
+    WinPrice: 0
+  - Index: 7
+    WinPrice: 0
+  - Index: 8
+    WinPrice: 0
+  - Index: 9
+    WinPrice: 0
+  - Index: 10
+    WinPrice: 0
+  - Index: 11
+    WinPrice: 0
+  - Index: 12
+    WinPrice: 0
+  - Index: 13
+    WinPrice: 0
+  - Index: 14
+    WinPrice: 0
+  - Index: 15
+    WinPrice: 0
+  - Index: 16
+    WinPrice: 0
+  - Index: 17
+    WinPrice: 0
+  - Index: 18
+    WinPrice: 0
+  - Index: 19
+    WinPrice: 0
+  - Index: 20
+    WinPrice: 0
+  - Index: 21
+    WinPrice: 0

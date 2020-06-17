@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 public class MenuRootCanvasMediator : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _selectLevelScreen;
     [SerializeField]
     private GameObject _mainMenuScreen;
     [SerializeField]
@@ -29,6 +32,7 @@ public class MenuRootCanvasMediator : MonoBehaviour
 
     public void OnEnable()
     {
+        _eventsAggregator.PlayClicked += OnPlayClicked;
         _eventsAggregator.HomeClicked += OnHomeClicked;
         _eventsAggregator.ShipsClicked += OnShipsClicked;
         _eventsAggregator.EquipmentShopClicked += OnEquipmentShopClicked;
@@ -44,10 +48,17 @@ public class MenuRootCanvasMediator : MonoBehaviour
 
     public void OnDisable()
     {
+        _eventsAggregator.PlayClicked -= OnPlayClicked;
         _eventsAggregator.HomeClicked -= OnHomeClicked;
         _eventsAggregator.ShipsClicked -= OnShipsClicked;
         _eventsAggregator.EquipmentShopClicked -= OnEquipmentShopClicked;
         _eventsAggregator.InventoryClicked -= OnInventoryClicked;
+    }
+
+    private void OnPlayClicked(GameObject activeScreen)
+    {
+        Destroy(activeScreen);
+        _diContainer.InstantiatePrefab(_selectLevelScreen, transform);
     }
 
     private void OnShipsClicked(GameObject activeScreen)

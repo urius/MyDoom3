@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: HangarScreenAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: a2406eccc645a4075a7cd8e9a4aae694, type: 3}
+    totalSpriteSurfaceArea: 232417
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 9ce0fe833d5df4bd9b2ca2cd72ea98b8, type: 3}
+  - {fileID: 21300000, guid: 64bad4a4c0dbc4eac85cc59a273e7a64, type: 3}
+  - {fileID: 21300000, guid: 00cffbf7aa90447ee82571cf9e5cce0f, type: 3}
+  - {fileID: 21300000, guid: d267ef1f03d204058aebe0009dc8852d, type: 3}
+  - {fileID: 21300000, guid: 9240cfaf2934e44c497fed26894d55d1, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - textbox02_Opaque
+  - Btn_tool_n
+  - Icon_Money4
+  - Btn_sci-fi button02_n
+  - Btn_nextpage_n
+  m_Tag: HangarScreenAtlas
+  m_IsVariant: 0

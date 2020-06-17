@@ -35,9 +35,13 @@ public class UnitFactory : MonoBehaviour, IUnitFactory
 
     public PlayerShipModel CreatePlayerShip(ShipDataMin shipDataMin)
     {
-        var staticData = _modelsFactory.CreateShipData(shipDataMin);
+        var shipData = _modelsFactory.CreateShipData(shipDataMin);
+        return CreatePlayerShip(shipData);
+    }
 
-        var model = new PlayerShipModel(staticData);
+    public PlayerShipModel CreatePlayerShip(ShipData shipData)
+    {
+        var model = new PlayerShipModel(shipData);
         _playerShipModelHolder.ShipModel = model;
         _diContainer.Instantiate<ShipMediator>(new object[] { model });
 

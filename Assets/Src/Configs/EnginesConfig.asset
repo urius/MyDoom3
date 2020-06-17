@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25ac8998489d42aa8798115cdbb457e, type: 3}
+  m_Name: EnginesConfig
+  m_EditorClassIdentifier: 
+  _configs:
+  - Prefab: {fileID: 4879620815930333369, guid: d879a0629ca3643df93693ac28057ac9,
+      type: 3}
+    IconSprite: {fileID: 21300000, guid: c2bc03d7ab6ad40c08c03ac0dabb2fe8, type: 3}
+    NameId: rocket_engine
+    HideForPlayer: 0
+    Cost: 0
+    EngineId: 5
+    Speed: 0.5
+    Mobility: 0.1
+    RotationSpeed: 2
+  - Prefab: {fileID: 6399182448743076772, guid: 178aeac4480ab409c9ab64b9d77196a8,
+      type: 3}
+    IconSprite: {fileID: 21300000, guid: 0e46cac2be1d745f78151c754b085baa, type: 3}
+    NameId: rocket_engine_x2
+    HideForPlayer: 0
+    Cost: 0
+    EngineId: 1
+    Speed: 0.5
+    Mobility: 0.1
+    RotationSpeed: 2
+  - Prefab: {fileID: 7510305391344258792, guid: 2b5cb5b79544640809a7de2009698cb0,
+      type: 3}
+    IconSprite: {fileID: 21300000, guid: 79f244ff9b2ac4d6098fd110281a168e, type: 3}
+    NameId: nuclear_engine
+    HideForPlayer: 0
+    Cost: 0
+    EngineId: 2
+    Speed: 0.5
+    Mobility: 0.1
+    RotationSpeed: 2
+  - Prefab: {fileID: 5074213585346219936, guid: 1aca875c96c9042e49fbf9e8245c8031,
+      type: 3}
+    IconSprite: {fileID: 21300000, guid: 72b1ff6cd53844a45b1aa35ac3f1371f, type: 3}
+    NameId: nuclear_engine_x2
+    HideForPlayer: 0
+    Cost: 0
+    EngineId: 3
+    Speed: 0.5
+    Mobility: 0.1
+    RotationSpeed: 2
+  - Prefab: {fileID: 3295515014998151262, guid: 51fb83940fd2247e390943a53113e4b0,
+      type: 3}
+    IconSprite: {fileID: 21300000, guid: 030a5ead73a5642f7b4fefa4d71a1451, type: 3}
+    NameId: quantum_engine
+    HideForPlayer: 0
+    Cost: 0
+    EngineId: 4
+    Speed: 0.5
+    Mobility: 0.1
+    RotationSpeed: 2

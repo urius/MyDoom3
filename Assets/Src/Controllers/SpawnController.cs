@@ -6,21 +6,23 @@ using Zenject;
 public class SpawnController : MonoBehaviour, IInitializable
 {
     [SerializeField]
-    private ShipDataMin _playerShipDataTemp; //Temp: remove when created player data holder
-    [SerializeField]
     private ShipDataMin _enemyShipDataTemp; //Temp: remove when created enemy levels congig
 
     private IUnitFactory _unitFactory;
+    private PlayerDataModel _playerDataModel;
 
     [Inject]
-    public void Construct(IUnitFactory unitFactory)
+    public void Construct(
+        IUnitFactory unitFactory,
+        PlayerDataModel playerDataModel)
     {
         _unitFactory = unitFactory;
+        _playerDataModel = playerDataModel;
     }
 
     public void Initialize()
     {
-        _unitFactory.CreatePlayerShip(_playerShipDataTemp);
+        _unitFactory.CreatePlayerShip(_playerDataModel.ShipData.ToShipDataMin());
         StartCoroutine(SpawEnemy());
     }
 

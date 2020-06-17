@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 public class MainMenuMediator : MonoBehaviour
 {
+    [SerializeField]
+    private Button _playButton;
     [SerializeField]
     private Button _inventoryButton;
     [SerializeField]
@@ -21,6 +24,7 @@ public class MainMenuMediator : MonoBehaviour
 
     private void OnEnable()
     {
+        _playButton.onClick.AddListener(OnPlayClick);
         _shipsButton.onClick.AddListener(OnShipsClick);
         _equipmentButton.onClick.AddListener(OnEquipmentShopClick);
         _inventoryButton.onClick.AddListener(OnInventoryClick);
@@ -28,9 +32,15 @@ public class MainMenuMediator : MonoBehaviour
 
     private void OnDisable()
     {
+        _playButton.onClick.RemoveAllListeners();
         _shipsButton.onClick.RemoveAllListeners();
         _equipmentButton.onClick.RemoveAllListeners();
         _inventoryButton.onClick.RemoveAllListeners();
+    }
+
+    private void OnPlayClick()
+    {
+        _eventsAggregator.PlayClicked(this.gameObject);
     }
 
     private void OnShipsClick()
