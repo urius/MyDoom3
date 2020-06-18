@@ -9,51 +9,71 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 84e8d627d7db844158e79a24c0a58198, type: 3}
   m_Name: LevelsConfigProvider
   m_EditorClassIdentifier: Assembly-CSharp::LevelsConfigProvider
   _levelConfigs:
   - Index: 0
     WinPrice: 0
+    Waves:
+    - ShipGroups:
+      - Ship: {fileID: 11400000, guid: 4088eb4adc3e64b898221caeb5ff6165, type: 2}
+        Amount: 10
+      - Ship: {fileID: 11400000, guid: 41fe69c2e6a774bf59b37d5ad0bfbf41, type: 2}
+        Amount: 10
+      TimeBetweenSpawn: 3
+    - ShipGroups:
+      - Ship: {fileID: 11400000, guid: 4088eb4adc3e64b898221caeb5ff6165, type: 2}
+        Amount: 10
+      - Ship: {fileID: 11400000, guid: 41fe69c2e6a774bf59b37d5ad0bfbf41, type: 2}
+        Amount: 10
+      TimeBetweenSpawn: 3
+    TimeBetweenWaves: 5
   - Index: 1
     WinPrice: 0
+    Waves:
+    - ShipGroups:
+      - Ship: {fileID: 11400000, guid: 4088eb4adc3e64b898221caeb5ff6165, type: 2}
+        Amount: 10
+      - Ship: {fileID: 11400000, guid: 41fe69c2e6a774bf59b37d5ad0bfbf41, type: 2}
+        Amount: 10
+      TimeBetweenSpawn: 3
+    - ShipGroups:
+      - Ship: {fileID: 11400000, guid: 4088eb4adc3e64b898221caeb5ff6165, type: 2}
+        Amount: 10
+      - Ship: {fileID: 11400000, guid: 41fe69c2e6a774bf59b37d5ad0bfbf41, type: 2}
+        Amount: 10
+      TimeBetweenSpawn: 3
+    TimeBetweenWaves: 5
   - Index: 2
     WinPrice: 0
+    Waves:
+    - ShipGroups:
+      - Ship: {fileID: 11400000, guid: 4088eb4adc3e64b898221caeb5ff6165, type: 2}
+        Amount: 10
+      - Ship: {fileID: 11400000, guid: 41fe69c2e6a774bf59b37d5ad0bfbf41, type: 2}
+        Amount: 10
+      TimeBetweenSpawn: 3
+    - ShipGroups:
+      - Ship: {fileID: 11400000, guid: 4088eb4adc3e64b898221caeb5ff6165, type: 2}
+        Amount: 10
+      - Ship: {fileID: 11400000, guid: 41fe69c2e6a774bf59b37d5ad0bfbf41, type: 2}
+        Amount: 10
+      TimeBetweenSpawn: 3
+    TimeBetweenWaves: 5
   - Index: 3
     WinPrice: 0
-  - Index: 4
-    WinPrice: 0
-  - Index: 5
-    WinPrice: 0
-  - Index: 6
-    WinPrice: 0
-  - Index: 7
-    WinPrice: 0
-  - Index: 8
-    WinPrice: 0
-  - Index: 9
-    WinPrice: 0
-  - Index: 10
-    WinPrice: 0
-  - Index: 11
-    WinPrice: 0
-  - Index: 12
-    WinPrice: 0
-  - Index: 13
-    WinPrice: 0
-  - Index: 14
-    WinPrice: 0
-  - Index: 15
-    WinPrice: 0
-  - Index: 16
-    WinPrice: 0
-  - Index: 17
-    WinPrice: 0
-  - Index: 18
-    WinPrice: 0
-  - Index: 19
-    WinPrice: 0
-  - Index: 20
-    WinPrice: 0
-  - Index: 21
-    WinPrice: 0
+    Waves:
+    - ShipGroups:
+      - Ship: {fileID: 11400000, guid: 4088eb4adc3e64b898221caeb5ff6165, type: 2}
+        Amount: 10
+      - Ship: {fileID: 11400000, guid: 41fe69c2e6a774bf59b37d5ad0bfbf41, type: 2}
+        Amount: 10
+      TimeBetweenSpawn: 3
+    - ShipGroups:
+      - Ship: {fileID: 11400000, guid: 4088eb4adc3e64b898221caeb5ff6165, type: 2}
+        Amount: 10
+      - Ship: {fileID: 11400000, guid: 41fe69c2e6a774bf59b37d5ad0bfbf41, type: 2}
+        Amount: 10
+      TimeBetweenSpawn: 3
+    TimeBetweenWaves: 5

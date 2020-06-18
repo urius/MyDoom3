@@ -32,7 +32,9 @@ public class ModelsFactory
             .Select(c => (WeaponData)CreateEquipment(c))
             .ToArray();
         var engineData = (EngineData)CreateEquipment(_enginesConfigProvider.GetConfigByEngineId(shipDataMin.EngineId));
-        var shieldData = (ShieldData)CreateEquipment(_shieldsConfigProvider.GetConfigByShieldId(shipDataMin.ShieldId));
+        var shieldData = shipDataMin.ShieldId != ShieldId.Undefined
+            ? (ShieldData)CreateEquipment(_shieldsConfigProvider.GetConfigByShieldId(shipDataMin.ShieldId))
+            : null;
         var shipData = new ShipData(
             shipConfig,
             weaponsData,

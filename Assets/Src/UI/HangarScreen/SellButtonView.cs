@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using DigitalRuby.Tween;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,18 +41,28 @@ public class SellButtonView : MonoBehaviour
         }
     }
 
-    public void Hide(bool animated = false)
+    public Task HideAsync(bool animated = false)
     {
         TweenFactory.RemoveTweenKey(ScaleTweenId, TweenStopBehavior.DoNotModify);
+
+        var tsc = new TaskCompletionSource<bool>();
+        void OnTweenEnded(ITween<Vector2> _ = null)
+        {
+            gameObject.SetActive(false);
+            tsc.TrySetResult(true);
+        }
+
         if (animated)
         {
-            gameObject.Tween(ScaleTweenId, _rectTransform.localScale, FadeOutScale, 0.3f, TweenScaleFunctions.QuadraticEaseIn, OnTweenScale, _ => gameObject.SetActive(false));
+            gameObject.Tween(ScaleTweenId, _rectTransform.localScale, FadeOutScale, 0.3f, TweenScaleFunctions.QuadraticEaseIn, OnTweenScale, OnTweenEnded);
         }
         else
         {
             _rectTransform.localScale = FadeOutScale;
-            gameObject.SetActive(false);
+            OnTweenEnded();
         }
+
+        return tsc.Task;
     }
 
     public bool HitTestPoint(Vector3 point)

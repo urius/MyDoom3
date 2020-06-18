@@ -12,6 +12,7 @@ public class GlobalModelInstaller : ScriptableObjectInstaller<GlobalModelInstall
         Container.Bind<ModelsFactory>().AsTransient();
 
         Container.Bind<PlayerDataModel>().AsSingle();
+        Container.Bind<CurrentLevelConfigHolder>().AsSingle();
         Container.BindInstance(_defaultPlayerDataProvider).AsSingle();
     }
 }

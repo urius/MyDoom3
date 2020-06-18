@@ -28,7 +28,7 @@ public class BottomButtonsMediator : MonoBehaviour
 
     private void Start()
     {
-        _sellButtonView.Hide(false);
+        _sellButtonView.HideAsync(false);
 
         _selectLevelButton.onClick.AddListener(OnSelectLevelClicked);
     }
@@ -54,23 +54,23 @@ public class BottomButtonsMediator : MonoBehaviour
         _sellButtonView.Show(true);
     }
 
-    private void OnStopDrag(EquipmentData equipmentData, Vector3 point)
+    private async void OnStopDrag(EquipmentData equipmentData, Vector3 point)
     {
         _menuEventsAggregator.FlyingEquipmentMouseUp -= OnStopDrag;
-
-        UpdateSelectLevelButtonVisibility(true);
 
         if (equipmentData == null)
         {
             return;
         }
 
-        _sellButtonView.Hide(true);
-
         if (_sellButtonView.HitTestPoint(point))
         {
             _menuEventsAggregator.RequestSellEqipment(equipmentData);
         }
+
+        await _sellButtonView.HideAsync(true);
+
+        UpdateSelectLevelButtonVisibility(true);
     }
 
     private void UpdateSelectLevelButtonVisibility(bool isVisible)
